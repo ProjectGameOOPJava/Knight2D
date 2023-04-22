@@ -1,3 +1,5 @@
+package main;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -42,5 +44,5 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         g.setColor(Color.RED);
         g.fillRect(xDelta, yDelta, 200, 100);
-       
+	}
 }
