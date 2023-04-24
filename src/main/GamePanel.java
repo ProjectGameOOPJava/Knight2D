@@ -7,7 +7,6 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -23,7 +22,7 @@ public class GamePanel extends JPanel {
 	private int xDelta = 200, yDelta = 200;
 	private BufferedImage img;
 	private BufferedImage[][] animations;
-	private int aniTick, aniIndex, aniSpeed = 15;
+	private int aniTick, aniIndex, aniSpeed = 30;
 	private int playerAction = IDLE;
 	private int playerDir = -1;
 	private boolean moving = false;
@@ -114,13 +113,14 @@ public class GamePanel extends JPanel {
 		repaint();
     }
 
-    public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+	public void updateGame() {
 
 		updateAnimationTick();
 		setAnimation();
 		updatePos();
-
+	}
+    public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		g.drawImage(animations[playerAction][aniIndex], (int) xDelta, (int) yDelta, 240, 164, null);
 	}
 }
