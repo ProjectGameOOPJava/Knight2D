@@ -4,10 +4,7 @@ import static utilz.Constants.PlayerConstants.*;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 
 import utilz.LoadSave;
 
@@ -17,7 +14,7 @@ public class Player extends Entity {
 	private int playerAction = IDLE;
 	private boolean moving = false, attacking = false;
 	private boolean left, up, right, down;
-	private float playerSpeed = 2.0f;
+	private float playerSpeed = 3.0f;
 
 	public Player(float x, float y, int width, int height) {
 		super(x, y, width, height);
@@ -31,7 +28,7 @@ public class Player extends Entity {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(animations[playerAction][aniIndex], (int) x, (int) y, width*2, height*2, null);
+		g.drawImage(animations[playerAction][aniIndex], (int) x, (int) y, width, height, null);
 	}
 
 	private void updateAnimationTick() {
