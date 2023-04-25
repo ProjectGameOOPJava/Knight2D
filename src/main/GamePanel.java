@@ -1,22 +1,17 @@
 package main;
 
-import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
 
-import static utilz.Constants.PlayerConstants.*;
-import static utilz.Constants.Directions.*;
+
+import static main.Game.GAME_HEIGHT;
+import static main.Game.GAME_WIDTH;
 
 public class GamePanel extends JPanel {
     private MouseInputs mouseInputs;
@@ -42,11 +37,6 @@ public class GamePanel extends JPanel {
 	}
     public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		g.setColor(Color.white);
-		for (int i = 0; i < 64; i++)
-			for (int j = 0; j < 40; j++)
-				g.fillRect(i * 20, j * 20, 20, 20);
 		game.render(g);
 	}
 
