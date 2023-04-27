@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-
 import javax.imageio.ImageIO;
 
 import main.Game;
@@ -15,6 +14,8 @@ public class LoadSave {
 	public static final String PLAYER_ATLAS = "playersheet.png";
 	public static final String LEVEL_ATLAS = "tiles.png";
 	public static final String level1 = "level1.png";
+	public static final String MENU_BUTTONS = "button_atlas.png";
+	public static final String MENU_BACKGROUND = "menuKnight3072x1024.jpg";
 
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;

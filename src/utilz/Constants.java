@@ -1,7 +1,19 @@
 package utilz;
 
+import main.Game;
+
 public class Constants {
-    public static class Directions {
+
+	public static class UI {
+		public static class Buttons {
+			public static final int B_WIDTH_DEFAULT = 140;
+			public static final int B_HEIGHT_DEFAULT = 56;
+			public static final int B_WIDTH = (int) (B_WIDTH_DEFAULT * Game.SCALE);
+			public static final int B_HEIGHT = (int) (B_HEIGHT_DEFAULT * Game.SCALE);
+		}
+	}
+
+	public static class Directions {
 		public static final int LEFT = 0;
 		public static final int UP = 1;
 		public static final int RIGHT = 2;
@@ -20,24 +32,24 @@ public class Constants {
 
 		public static int GetSpriteAmount(int player_action) {
 			switch (player_action) {
-			case RUNNING:
-				return 10;
-			case IDLE:
-				return 10;
-			case HIT:
-				return 1;
-			case JUMP:
-				return 3;
-			case GROUND:
-				return 1;
-			case FALLING:
-				return 3;
-            case ATTACK:
-                return 10;
-            case DEAD:
-                return 10;
-            default:
-                return 1;
+				case RUNNING:
+					return 10;
+				case IDLE:
+					return 10;
+				case HIT:
+					return 1;
+				case JUMP:
+					return 3;
+				case GROUND:
+					return 1;
+				case FALLING:
+					return 3;
+				case ATTACK:
+					return 10;
+				case DEAD:
+					return 10;
+				default:
+					return 1;
 			}
 		}
 	}
