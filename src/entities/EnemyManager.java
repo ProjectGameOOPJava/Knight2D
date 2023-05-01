@@ -22,21 +22,26 @@ public class EnemyManager {
 
 	private void addEnemies() {
 		snails = LoadSave.GetSnails();
-		System.out.println("size of snails: " + snails.size());
+		
 	}
 
-	public void update() {
+	public void update(int[][] lvlData) {
 		for (Snail c : snails)
-			c.update();
+			c.update(lvlData);
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
-		drawCrabs(g, xLvlOffset);
+		drawSnails(g, xLvlOffset);
 	}
 
-	private void drawCrabs(Graphics g, int xLvlOffset) {
-		for (Snail c : snails)
-			g.drawImage(snailArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset, (int) c.getHitbox().y, SNAIL_WIDTH, SNAIL_HEIGHT, null);
+	private void drawSnails(Graphics g, int xLvlOffset) {
+		for (Snail c : snails) {
+			g.drawImage(snailArr[c.getEnemyState()][c.getAniIndex()], 
+					(int) c.getHitbox().x - xLvlOffset - SNAIL_DRAWOFFSET_X, 
+					(int) c.getHitbox().y - SNAIL_DRAWOFFSET_Y, SNAIL_WIDTH,
+					SNAIL_HEIGHT, null);
+			c.drawHitbox(g, xLvlOffset);
+		}
 
 	}
 
