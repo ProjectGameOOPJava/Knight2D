@@ -36,7 +36,7 @@ public class Constants {
 	
 	public static class EnemyConstants {
 		public static final int SNAIL = 0;
-
+		public static final int IDLE = 3;
 		public static final int RUNNING = 2;
 		public static final int ATTACK = 1;
 		public static final int DEAD = 0;
@@ -46,6 +46,9 @@ public class Constants {
 
 		public static final int SNAIL_WIDTH = (int) (SNAIL_WIDTH_DEFAULT * Game.SCALE);
 		public static final int SNAIL_HEIGHT = (int) (SNAIL_HEIGHT_DEFAULT * Game.SCALE);
+		
+		public static final int SNAIL_DRAWOFFSET_X = (int) (15 * Game.SCALE);
+		public static final int SNAIL_DRAWOFFSET_Y = (int) (12 * Game.SCALE);
 
 		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
 

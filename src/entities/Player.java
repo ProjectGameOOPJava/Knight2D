@@ -5,6 +5,10 @@ import static utilz.HelpMethods.*;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 
 import main.Game;
 import utilz.LoadSave;
@@ -41,7 +45,7 @@ public class Player extends Entity {
 
 	public void render(Graphics g, int lvlOffset) {
 		g.drawImage(animations[playerAction][aniIndex], (int) (hitbox.x - xDrawOffset) - lvlOffset, (int) (hitbox.y - yDrawOffset), width, height, null);
-//		drawHitbox(g);
+		drawHitbox(g, lvlOffset);
 	}
 
 	private void updateAnimationTick() {
@@ -111,7 +115,7 @@ public class Player extends Entity {
 				inAir = true;
 
 		if (inAir) {
-			if (CollisionCheck(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
+			if (CanMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
 				hitbox.y += airSpeed;
 				airSpeed += gravity;
 				updateXPos(xSpeed);
@@ -143,7 +147,7 @@ public class Player extends Entity {
 	}
 	
 	private void updateXPos(float xSpeed) {
-		if (CollisionCheck(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
+		if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
 			hitbox.x += xSpeed;
 		} else {
 			hitbox.x = GetEntityXPosNextToWall(hitbox, xSpeed);

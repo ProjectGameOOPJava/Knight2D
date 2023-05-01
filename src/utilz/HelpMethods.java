@@ -6,7 +6,7 @@ import main.Game;
 
 public class HelpMethods {
 
-	public static boolean CollisionCheck(float x, float y, float width, float height, int[][] lvlData) {
+	public static boolean CanMoveHere(float x, float y, float width, float height, int[][] lvlData) {
 		if (!IsSolid(x, y, lvlData))
 			if (!IsSolid(x + width, y + height, lvlData))
 				if (!IsSolid(x + width, y, lvlData))
@@ -17,7 +17,6 @@ public class HelpMethods {
 
 	private static boolean IsSolid(float x, float y, int[][] lvlData) {
 		int maxWidth = lvlData[0].length * Game.TILES_SIZE;
-		
 		if (x < 0 || x >= maxWidth)
 			return true;
 		if (y < 0 || y >= Game.GAME_HEIGHT)
@@ -32,7 +31,7 @@ public class HelpMethods {
 			return true;
 		return false;
 	}
-
+	
 	public static float GetEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
 		int currentTile = (int) (hitbox.x / Game.TILES_SIZE);
 		if (xSpeed > 0) {
@@ -44,7 +43,7 @@ public class HelpMethods {
 			// Left
 			return currentTile * Game.TILES_SIZE;
 	}
-
+	
 	public static float GetEntityYPosUnderRoofOrAboveFloor(Rectangle2D.Float hitbox, float airSpeed) {
 		int currentTile = (int) (hitbox.y / Game.TILES_SIZE);
 		if (airSpeed > 0) {
@@ -67,6 +66,8 @@ public class HelpMethods {
 		return true;
 
 	}
-
-
+	
+	public static boolean IsFloor(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData) {
+		return IsSolid(hitbox.x + xSpeed, hitbox.y + hitbox.height + 1, lvlData);
+	}
 }
