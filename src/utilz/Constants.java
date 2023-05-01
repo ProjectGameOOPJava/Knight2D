@@ -33,6 +33,39 @@ public class Constants {
 			public static final int SLIDER_WIDTH = (int) (SLIDER_DEFAULT_WIDTH * Game.SCALE);
 		}
 	}
+	
+	public static class EnemyConstants {
+		public static final int SNAIL = 0;
+
+		public static final int RUNNING = 2;
+		public static final int ATTACK = 1;
+		public static final int DEAD = 0;
+
+		public static final int SNAIL_WIDTH_DEFAULT = 48;
+		public static final int SNAIL_HEIGHT_DEFAULT = 34;
+
+		public static final int SNAIL_WIDTH = (int) (SNAIL_WIDTH_DEFAULT * Game.SCALE);
+		public static final int SNAIL_HEIGHT = (int) (SNAIL_HEIGHT_DEFAULT * Game.SCALE);
+
+		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
+
+			switch (enemy_type) {
+			case SNAIL:
+				switch (enemy_state) {
+				case RUNNING:
+					return 8;
+				case ATTACK:
+					return 8;
+				case DEAD:
+					return 8;
+				}
+			}
+
+			return 0;
+
+		}
+
+	}
 
 	public static class Directions {
 		public static final int LEFT = 0;
