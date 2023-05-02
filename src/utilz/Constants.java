@@ -36,6 +36,7 @@ public class Constants {
 	
 	public static class EnemyConstants {
 		public static final int SNAIL = 0;
+		
 		public static final int IDLE = 3;
 		public static final int RUNNING = 2;
 		public static final int ATTACK = 1;
@@ -47,7 +48,7 @@ public class Constants {
 		public static final int SNAIL_WIDTH = (int) (SNAIL_WIDTH_DEFAULT * Game.SCALE);
 		public static final int SNAIL_HEIGHT = (int) (SNAIL_HEIGHT_DEFAULT * Game.SCALE);
 		
-		public static final int SNAIL_DRAWOFFSET_X = (int) (15 * Game.SCALE);
+		public static final int SNAIL_DRAWOFFSET_X = (int) (12 * Game.SCALE);
 		public static final int SNAIL_DRAWOFFSET_Y = (int) (12 * Game.SCALE);
 
 		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
@@ -61,13 +62,33 @@ public class Constants {
 					return 8;
 				case DEAD:
 					return 8;
+
 				}
 			}
 
 			return 0;
 
 		}
+		
+		public static int GetMaxHealth(int enemy_type) {
+			switch (enemy_type) {
+			case SNAIL:
+				return 1;
+			default:
+				return 1;
+			}
+		}
+		
+		public static int GetEnemyDmg(int enemy_type) {
+			switch (enemy_type) {
+			case SNAIL:
+				return 0;
+			default:
+				return 0;
+			}
 
+		}
+		
 	}
 
 	public static class Directions {
@@ -110,5 +131,7 @@ public class Constants {
 			}
 		}
 	}
+	
+	
 
 }

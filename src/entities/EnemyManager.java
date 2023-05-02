@@ -1,6 +1,7 @@
 package entities;
 
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -27,7 +28,8 @@ public class EnemyManager {
 
 	public void update(int[][] lvlData, Player player) {
 		for (Snail c : snails)
-			c.update(lvlData, player);
+			if (c.isActive())
+				c.update(lvlData, player);
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
@@ -35,14 +37,24 @@ public class EnemyManager {
 	}
 
 	private void drawSnails(Graphics g, int xLvlOffset) {
-		for (Snail c : snails) {
-			g.drawImage(snailArr[c.getEnemyState()][c.getAniIndex()], 
-					(int) c.getHitbox().x - xLvlOffset - SNAIL_DRAWOFFSET_X, 
-					(int) c.getHitbox().y - SNAIL_DRAWOFFSET_Y, SNAIL_WIDTH,
-					SNAIL_HEIGHT, null);
-			//c.drawHitbox(g, xLvlOffset);
+		for (Snail c : snails)
+			if (c.isActive()) {
+				g.drawImage(snailArr[c.getEnemyState()][c.getAniIndex()], 
+						(int) c.getHitbox().x - xLvlOffset - SNAIL_DRAWOFFSET_X + c.flipX(), 
+						(int) c.getHitbox().y - SNAIL_DRAWOFFSET_Y,
+						SNAIL_WIDTH * c.flipW(), SNAIL_HEIGHT, null);
+			c.drawHitbox(g, xLvlOffset);
 		}
 
+	}
+
+	public void checkEnemyHit(Rectangle2D.Float attackBox) {
+		for (Snail c : snails)
+			if (c.isActive())
+				if (attackBox.intersects(c.getHitbox())) {
+					c.hurt(10);
+					return;
+				}
 	}
 
 	private void loadEnemyImgs() {
@@ -51,5 +63,10 @@ public class EnemyManager {
 		for (int j = 0; j < snailArr.length; j++)
 			for (int i = 0; i < snailArr[j].length; i++)
 				snailArr[j][i] = temp.getSubimage(i * SNAIL_WIDTH, j * SNAIL_HEIGHT, SNAIL_WIDTH_DEFAULT, SNAIL_HEIGHT_DEFAULT);
+	}
+	
+	public void resetAllEnemies() {
+		for (Snail c : snails)
+			c.resetEnemy();
 	}
 }

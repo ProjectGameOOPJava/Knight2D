@@ -19,7 +19,7 @@ public class LoadSave {
 
 	public static final String PLAYER_ATLAS = "playersheet.png";
 	public static final String LEVEL_ATLAS = "tiles.png";
-	public static final String level1 = "level_one_long_update.png";
+	public static final String level1 = "level_one_data_long_3e.png";
 	public static final String MENU_BUTTONS = "button_atlas.png";
 	public static final String MENU_BACKGROUND = "menuKnight3072x1024.jpg";
 	public static final String PAUSE_BACKGROUND = "pause_menu.png";
@@ -28,6 +28,7 @@ public class LoadSave {
 	public static final String VOLUME_BUTTONS = "volume_buttons.png";
 	public static final String PLAYING_BG_IMG = "background_playing.jpg";
 	public static final String SNAIL_SPRITE = "snailsheet.png";
+	public static final String STATUS_BAR = "health_power_bar.png";
 	
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;
