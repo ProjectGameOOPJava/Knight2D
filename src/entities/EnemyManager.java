@@ -25,9 +25,9 @@ public class EnemyManager {
 		
 	}
 
-	public void update(int[][] lvlData) {
+	public void update(int[][] lvlData, Player player) {
 		for (Snail c : snails)
-			c.update(lvlData);
+			c.update(lvlData, player);
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
@@ -40,7 +40,7 @@ public class EnemyManager {
 					(int) c.getHitbox().x - xLvlOffset - SNAIL_DRAWOFFSET_X, 
 					(int) c.getHitbox().y - SNAIL_DRAWOFFSET_Y, SNAIL_WIDTH,
 					SNAIL_HEIGHT, null);
-			c.drawHitbox(g, xLvlOffset);
+			//c.drawHitbox(g, xLvlOffset);
 		}
 
 	}
