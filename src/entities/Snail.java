@@ -2,6 +2,13 @@ package entities;
 
 import static utilz.Constants.EnemyConstants.*;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.Rectangle2D.Float;
+
+import static utilz.Constants.Directions.*;
+
 import main.Game;
 
 public class Snail extends Enemy {
@@ -12,12 +19,12 @@ public class Snail extends Enemy {
 	}
 	
 	public void update(int[][] lvlData, Player player) {
-		updateMove(lvlData, player);
+		updateBehavior(lvlData, player);
 		updateAnimationTick();
 
 	}
 
-	private void updateMove(int[][] lvlData, Player player) {
+	private void updateBehavior(int[][] lvlData, Player player) {
 		if (firstUpdate)
 			firstUpdateCheck(lvlData);
 
@@ -34,8 +41,25 @@ public class Snail extends Enemy {
 			case ATTACK: 
 				if (!isPlayerInRange(player))
 					newState(RUNNING);
+				break;
+			
 			}
 		}
+
+	}
+	
+	public int flipX() {
+		if (walkDir == RIGHT)
+			return width;
+		else
+			return 0;
+	}
+
+	public int flipW() {
+		if (walkDir == RIGHT)
+			return -1;
+		else
+			return 1;
 
 	}
 	
@@ -49,7 +73,18 @@ public class Snail extends Enemy {
 				aniIndex = 0;
 				if(enemyState == ATTACK)
 					aniIndex = 7;
+				switch (enemyState) {
+				case ATTACK -> aniIndex = 7;
+				case DEAD -> active = false;
+				}
 			}
 		}
+	}
+	
+	@Override
+	public void hurt(int amount) {
+		currentHealth -= amount;
+		if (currentHealth <= 0)
+			newState(DEAD);
 	}
 }
