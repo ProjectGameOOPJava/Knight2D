@@ -2,11 +2,6 @@ package entities;
 
 import static utilz.Constants.EnemyConstants.*;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D.Float;
-
 import static utilz.Constants.Directions.*;
 
 import main.Game;
@@ -33,9 +28,10 @@ public class Snail extends Enemy {
 		else {
 			switch (enemyState) {
 			case RUNNING:
-		
-				if (isPlayerInRange(player))
-					newState(ATTACK);
+				if (canSeePlayer(lvlData, player)) {
+					if (isPlayerInRange(player))
+						newState(ATTACK);
+				}
 				move(lvlData);
 				break;
 			case ATTACK: 
