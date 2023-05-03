@@ -182,7 +182,8 @@ public class Player extends Entity {
 		if (jump)
 			jump();
 		if (!inAir)
-			if ((!left && !right) || (right && left))
+			if ((!left && !right) || (right && left) 
+					|| (right && attacking) || (left && attacking))
 				return;
 
 		float xSpeed = 0;
