@@ -70,8 +70,8 @@ public class Snail extends Enemy {
 				if(enemyState == ATTACK)
 					aniIndex = 7;
 				switch (enemyState) {
-				case ATTACK -> aniIndex = 7;
-				case DEAD -> active = false;
+				case ATTACK:  aniIndex = 7; break;
+				case DEAD : active = false; break;
 				}
 			}
 		}
