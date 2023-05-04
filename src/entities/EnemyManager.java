@@ -44,7 +44,7 @@ public class EnemyManager {
 	private void drawSnails(Graphics g, int xLvlOffset) {
 		for (Snail c : snails)
 			if (c.isActive()) {
-				g.drawImage(snailArr[c.getEnemyState()][c.getAniIndex()], 
+				g.drawImage(snailArr[c.getState()][c.getAniIndex()], 
 						(int) c.getHitbox().x - xLvlOffset - SNAIL_DRAWOFFSET_X + c.flipX(), 
 						(int) c.getHitbox().y - SNAIL_DRAWOFFSET_Y,
 						SNAIL_WIDTH * c.flipW(), SNAIL_HEIGHT, null);

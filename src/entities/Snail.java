@@ -4,13 +4,16 @@ import static utilz.Constants.EnemyConstants.*;
 
 import static utilz.Constants.Directions.*;
 
+import static utilz.Constants.*;
+
 import main.Game;
 
 public class Snail extends Enemy {
 	
 	public Snail(float x, float y) {
 		super(x, y, SNAIL_WIDTH, SNAIL_HEIGHT, SNAIL);
-		initHitbox(x, y, (int) (25 * Game.SCALE), (int) (19 * Game.SCALE));
+		initHitbox(25, 19);
+		this.state = RUNNING;
 	}
 	
 	public void update(int[][] lvlData, Player player) {
@@ -26,7 +29,7 @@ public class Snail extends Enemy {
 		if (inAir)
 			updateInAir(lvlData);
 		else {
-			switch (enemyState) {
+			switch (state) {
 			case RUNNING:
 				if (canSeePlayer(lvlData, player)) {
 					if (isPlayerInRange(player))
@@ -62,14 +65,14 @@ public class Snail extends Enemy {
 	@Override
 	protected void updateAnimationTick() {
 		aniTick++;
-		if (aniTick >= aniSpeed) {
+		if (aniTick >= ANI_SPEED) {
 			aniTick = 0;
 			aniIndex++;
-			if (aniIndex >= GetSpriteAmount(enemyType, enemyState)) {
+			if (aniIndex >= GetSpriteAmount(enemyType, state)) {
 				aniIndex = 0;
-				if(enemyState == ATTACK)
+				if(state == ATTACK)
 					aniIndex = 7;
-				switch (enemyState) {
+				switch (state) {
 				case ATTACK:  aniIndex = 7; break;
 				case DEAD : active = false; break;
 				}
