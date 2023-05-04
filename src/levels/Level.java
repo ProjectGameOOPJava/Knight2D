@@ -3,6 +3,9 @@ package levels;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import objects.GameContainer;
+import objects.Potion;
+import utilz.HelpMethods;
 
 import entities.Snail;
 import main.Game;
@@ -15,6 +18,8 @@ public class Level {
 	private BufferedImage img;
 	private int[][] lvlData;
 	private ArrayList<Snail> snails;
+	private ArrayList<Potion> potions;
+	private ArrayList<GameContainer> containers;
 	private int lvlTilesWide;
 	private int maxTilesOffset;
 	private int maxLvlOffsetX;
@@ -24,8 +29,18 @@ public class Level {
 		this.img = img;
 		createLevelData();
 		createEnemies();
+		createPotions();
+		createContainers();
 		calcLvlOffsets();
 		calcPlayerSpawn();
+	}
+	
+	private void createContainers() {
+		containers = HelpMethods.GetContainers(img);
+	}
+
+	private void createPotions() {
+		potions = HelpMethods.GetPotions(img);
 	}
 	
 	private void calcPlayerSpawn() {
@@ -68,6 +83,14 @@ public class Level {
 
 	public Point getPlayerSpawn() {
 		return playerSpawn;
+	}
+	
+	public ArrayList<Potion> getPotions() {
+		return potions;
+	}
+
+	public ArrayList<GameContainer> getContainers() {
+		return containers;
 	}
 	
 }

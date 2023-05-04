@@ -52,7 +52,7 @@ public class Player extends Entity {
 		super(x, y, width, height);
 		this.playing = playing;
 		this.state = IDLE;
-		this.maxHealth = 100;
+		this.maxHealth = 35;
 		this.currentHealth = maxHealth;
 		this.walkSpeed = Game.SCALE * 1.0f;
 		loadAnimations();
@@ -82,10 +82,16 @@ public class Player extends Entity {
 		updateAttackBox();
 
 		updatePos();
+		if (moving)
+			checkPotionTouched();
 		if (attacking)
 			checkAttack();
 		updateAnimationTick();
 		setAnimation();
+	}
+	
+	private void checkPotionTouched() {
+		playing.checkPotionTouched(hitbox);
 	}
 	
 	private void checkAttack() {
@@ -93,7 +99,7 @@ public class Player extends Entity {
 			return;
 		attackChecked = true;
 		playing.checkEnemyHit(attackBox);
-
+		playing.checkObjectHit(attackBox);
 	}
 
 	private void updateAttackBox() {
@@ -245,6 +251,10 @@ public class Player extends Entity {
 			currentHealth = 0;
 		else if (currentHealth >= maxHealth)
 			currentHealth = maxHealth;
+	}
+	
+	public void changePower(int value) {
+		System.out.println("Added power!");
 	}
 	
 	private void loadAnimations() {
