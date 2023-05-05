@@ -5,6 +5,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import entities.Player;
 import gamestates.Playing;
 import levels.Level;
 import utilz.LoadSave;
@@ -14,16 +15,23 @@ public class ObjectManager {
 
 	private Playing playing;
 	private BufferedImage[][] potionImgs, containerImgs;
+	private BufferedImage spikeImg;
 	private ArrayList<Potion> potions;
 	private ArrayList<GameContainer> containers;
+	private ArrayList<Spike> spikes;
 
 	public ObjectManager(Playing playing) {
 		this.playing = playing;
+		loadObjects(playing.getLevelManager().getCurrentLevel());
 		loadImgs();
-		this.potions = new ArrayList<Potion>();
-		this.containers = new ArrayList<GameContainer>();
 	}
 
+	public void checkSpikesTouched(Player p) {
+		for (Spike s : spikes)
+			if (s.getHitbox().intersects(p.getHitbox()))
+				p.kill();
+	}
+	
 	public void checkObjectTouched(Rectangle2D.Float hitbox) {
 		for (Potion p : potions)
 			if (p.isActive()) {
@@ -58,6 +66,7 @@ public class ObjectManager {
 	public void loadObjects(Level newLevel) {
 		potions = new ArrayList<>(newLevel.getPotions());
 		containers = new ArrayList<>(newLevel.getContainers());
+		spikes = newLevel.getSpikes();
 	}
 
 	private void loadImgs() {
@@ -74,6 +83,8 @@ public class ObjectManager {
 		for (int j = 0; j < containerImgs.length; j++)
 			for (int i = 0; i < containerImgs[j].length; i++)
 				containerImgs[j][i] = containerSprite.getSubimage(40 * i, 30 * j, 40, 30);
+		
+		spikeImg = LoadSave.GetSpriteAtlas(LoadSave.TRAP_ATLAS);
 	}
 
 	public void update() {
@@ -89,6 +100,13 @@ public class ObjectManager {
 	public void draw(Graphics g, int xLvlOffset) {
 		drawPotions(g, xLvlOffset);
 		drawContainers(g, xLvlOffset);
+		drawTraps(g, xLvlOffset);
+	}
+	
+	private void drawTraps(Graphics g, int xLvlOffset) {
+		for (Spike s : spikes)
+			g.drawImage(spikeImg, (int) (s.getHitbox().x - xLvlOffset), (int) (s.getHitbox().y - s.getyDrawOffset()), SPIKE_WIDTH, SPIKE_HEIGHT, null);
+
 	}
 
 	private void drawContainers(Graphics g, int xLvlOffset) {
