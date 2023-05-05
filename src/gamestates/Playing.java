@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import entities.EnemyManager;
 import entities.Player;
 import levels.LevelManager;
+import levels.Level;
 import main.Game;
 import objects.ObjectManager;
 import ui.GameOverOverlay;
@@ -145,6 +146,11 @@ public class Playing extends State implements Statemethods {
 	
 	public void checkPotionTouched(Rectangle2D.Float hitbox) {
 		objectManager.checkObjectTouched(hitbox);
+	}
+	
+	
+	public void checkSpikesTouched(Player p) {
+		objectManager.checkSpikesTouched(p);
 	}
 	
 	@Override
