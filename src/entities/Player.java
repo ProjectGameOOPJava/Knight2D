@@ -321,6 +321,7 @@ public class Player extends Entity {
 		inAir = false;
 		attacking = false;
 		moving = false;
+		jump = false;
 		state = IDLE;
 		currentHealth = maxHealth;
 
