@@ -31,6 +31,7 @@ public class LoadSave {
 	public static final String CANNON_ATLAS = "cannon_atlas.png";
 	public static final String CANNON_BALL = "ball.png";
 	public static final String DEATH_SCREEN = "death_screen.png";
+	public static final String OPTIONS_MENU = "options_background.png";
 
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;
@@ -47,21 +48,20 @@ public class LoadSave {
 	public static BufferedImage[] GetAllLevels() {
 
 		List<String> levelNames = Arrays.asList("1.png", "2.png", "3.png");
-	
+
 		BufferedImage[] imgs = new BufferedImage[levelNames.size()];
-	
-		for(int i = 0; i < imgs.length; i++) {
-			
+
+		for (int i = 0; i < imgs.length; i++) {
+
 			File f = new File("res/lvls/" + levelNames.get(i));
-	
+
 			try {
 				imgs[i] = ImageIO.read(f);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
 		}
-	
-		return imgs;
-		}
-}
 
+		return imgs;
+	}
+}
