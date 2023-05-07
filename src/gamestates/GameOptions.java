@@ -120,7 +120,3 @@ public class GameOptions extends State implements Statemethods {
     }
 
 }
-
-public class GameOptions {
-
-}
