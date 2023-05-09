@@ -181,6 +181,9 @@ public class Playing extends State implements Statemethods {
 				case KeyEvent.VK_J:
 					player.setAttacking(true);
 					break;
+				case KeyEvent.VK_R:
+					player.setPowerAttack(true);
+					break;
 				case KeyEvent.VK_BACK_SPACE:
 					Gamestate.state = Gamestate.MENU;
 					break;
@@ -202,6 +205,9 @@ public class Playing extends State implements Statemethods {
 					break;
 				case KeyEvent.VK_J:
 					player.setAttacking(false);
+					break;
+				case KeyEvent.VK_R:
+					player.setPowerAttack(true);
 					break;
 				case KeyEvent.VK_ESCAPE:
 					paused = !paused;
