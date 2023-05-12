@@ -69,17 +69,18 @@ public class PauseOverlay {
 		menuB.draw(g);
 		replayB.draw(g);
 		unpauseB.draw(g);
-
-		// Audio
+		
+		//Audio
 		audioOptions.draw(g);
-
+		
 	}
 
 	public void mouseDragged(MouseEvent e) {
-
+		
 		audioOptions.mouseDragged(e);
-
+	
 	}
+
 
 	public void mousePressed(MouseEvent e) {
 		if (isIn(e, menuB))
@@ -88,19 +89,21 @@ public class PauseOverlay {
 			replayB.setMousePressed(true);
 		else if (isIn(e, unpauseB))
 			unpauseB.setMousePressed(true);
-		else
+		else 
 			audioOptions.mousePressed(e);
 	}
 
 	public void mouseReleased(MouseEvent e) {
-
+		
 		if (isIn(e, menuB)) {
 			if (menuB.isMousePressed()) {
-				Gamestate.state = Gamestate.MENU;
+				playing.resetAll();
+				playing.setGamestate(Gamestate.MENU);
 				playing.unpauseGame();
 			}
 		} else if (isIn(e, replayB)) {
-			if (replayB.isMousePressed()) {
+			if (replayB.isMousePressed())
+			{
 				playing.resetAll();
 				playing.unpauseGame();
 			}

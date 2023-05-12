@@ -60,14 +60,16 @@ public class Playing extends State implements Statemethods {
 	}
 
 	public void loadNextLevel() {
-		resetAll();
+		
 		levelManager.loadNextLevel();
 		player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
 		objectManager.loadObjects(levelManager.getCurrentLevel());
+		resetAll();
 	}
 
 	private void loadStartLevel() {
 		enemyManager.loadEnemies(levelManager.getCurrentLevel());
+		objectManager.loadObjects(levelManager.getCurrentLevel());
 	}
 
 	private void calcLvlOffset() {
