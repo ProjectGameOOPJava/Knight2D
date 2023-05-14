@@ -22,7 +22,9 @@ public class LoadSave {
 	public static final String URM_BUTTONS = "urm_buttons.png";
 	public static final String VOLUME_BUTTONS = "volume_buttons.png";
 	public static final String PLAYING_BG_IMG = "background_playing.jpg";
-	public static final String SNAIL_SPRITE = "snailsheet.png";
+	public static final String SNAIL_ATLAS = "snailsheet.png";
+	public static final String BEE_ATLAS = "beesheet.png";
+	public static final String BOAR_ATLAS = "boarsheet.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
 	public static final String COMPLETED_IMG = "completed_sprite.png";
 	public static final String POTION_ATLAS = "potions_sprites.png";
@@ -32,6 +34,7 @@ public class LoadSave {
 	public static final String CANNON_BALL = "ball.png";
 	public static final String DEATH_SCREEN = "death_screen.png";
 	public static final String OPTIONS_MENU = "options_background.png";
+	public static final String GAME_COMPLETED = "game_completed.png";
 
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;

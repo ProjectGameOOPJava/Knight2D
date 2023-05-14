@@ -6,6 +6,7 @@ import static utilz.Constants.Directions.*;
 
 import static utilz.Constants.*;
 
+import gamestates.Playing;
 import main.Game;
 
 public class Snail extends Enemy {
@@ -16,13 +17,13 @@ public class Snail extends Enemy {
 		this.state = RUNNING;
 	}
 	
-	public void update(int[][] lvlData, Player player) {
-		updateBehavior(lvlData, player);
+	public void update(int[][] lvlData, Playing playing) {
+		updateBehavior(lvlData, playing);
 		updateAnimationTick();
 
 	}
 
-	private void updateBehavior(int[][] lvlData, Player player) {
+	private void updateBehavior(int[][] lvlData, Playing playing) {
 		if (firstUpdate)
 			firstUpdateCheck(lvlData);
 
@@ -31,14 +32,14 @@ public class Snail extends Enemy {
 		else {
 			switch (state) {
 			case RUNNING:
-				if (canSeePlayer(lvlData, player)) {
-					if (isPlayerInRange(player))
+				if (canSeePlayer(lvlData, playing.getPlayer())) {
+					if (isPlayerInRange(playing.getPlayer()))
 						newState(ATTACK);
 				}
 				move(lvlData);
 				break;
 			case ATTACK: 
-				if (!isPlayerInRange(player))
+				if (!isPlayerInRange(playing.getPlayer()))
 					newState(RUNNING);
 				break;
 			
@@ -74,7 +75,7 @@ public class Snail extends Enemy {
 					aniIndex = 7;
 				switch (state) {
 				case ATTACK:  aniIndex = 7; break;
-				case DEAD : active = false; break;
+				case HIT: active = false;
 				}
 			}
 		}
@@ -83,7 +84,9 @@ public class Snail extends Enemy {
 	@Override
 	public void hurt(int amount) {
 		currentHealth -= amount;
-		if (currentHealth <= 0)
-			newState(DEAD);
+		if (currentHealth <= 0) {
+			newState(HIT);
+		}
+			
 	}
 }

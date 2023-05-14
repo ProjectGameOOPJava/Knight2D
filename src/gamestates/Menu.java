@@ -11,36 +11,36 @@ import ui.MenuButton;
 import utilz.LoadSave;
 
 public class Menu extends State implements Statemethods {
-
+	
 	private MenuButton[] buttons = new MenuButton[3];
 	private BufferedImage backgroundImg;
 	private int menuX, menuY, menuWidth, menuHeight;
-
+	
 	public Menu(Game game) {
 		super(game);
 		loadButtons();
 		loadBackground();
 
 	}
-
+	
 	private void loadBackground() {
 		backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND);
 		menuWidth = Game.GAME_WIDTH;
-		menuHeight = Game.GAME_HEIGHT;
+		menuHeight = Game.GAME_HEIGHT ;
 		menuX = 0;
 		menuY = 0;
 
 	}
-
+	
 	private void loadButtons() {
-		buttons[0] = new MenuButton((int) Game.GAME_WIDTH / 2, (int) (100 * Game.SCALE), 0, Gamestate.PLAYING);
-		buttons[1] = new MenuButton((int) Game.GAME_WIDTH / 2, (int) (170 * Game.SCALE), 1, Gamestate.OPTIONS);
-		buttons[2] = new MenuButton((int) Game.GAME_WIDTH / 2, (int) (240 * Game.SCALE), 2, Gamestate.QUIT);
+		buttons[0] = new MenuButton((int)Game.GAME_WIDTH / 2  , (int) (100 * Game.SCALE), 0, Gamestate.PLAYING);
+		buttons[1] = new MenuButton((int)Game.GAME_WIDTH / 2  , (int) (170 * Game.SCALE), 1, Gamestate.OPTIONS);
+		buttons[2] = new MenuButton((int)Game.GAME_WIDTH / 2  , (int) (240 * Game.SCALE), 2, Gamestate.QUIT);
 	}
-
+	
 	@Override
 	public void update() {
-
+		
 		for (MenuButton mb : buttons)
 			mb.update();
 	}
@@ -52,7 +52,7 @@ public class Menu extends State implements Statemethods {
 
 		for (MenuButton mb : buttons)
 			mb.draw(g);
-
+		
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class Menu extends State implements Statemethods {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
+		
 		for (MenuButton mb : buttons) {
 			if (isIn(e, mb)) {
 				mb.setMousePressed(true);
@@ -87,7 +87,7 @@ public class Menu extends State implements Statemethods {
 		resetButtons();
 
 	}
-
+	
 	private void resetButtons() {
 		for (MenuButton mb : buttons)
 			mb.resetBools();
