@@ -19,13 +19,13 @@ public class GameOverOverlay {
 	private BufferedImage img;
 	private int imgX, imgY, imgW, imgH;
 	private UrmButton menu, play;
-
+	
 	public GameOverOverlay(Playing playing) {
 		this.playing = playing;
 		createImg();
 		createButtons();
 	}
-
+	
 	private void createButtons() {
 		int menuX = (int) (335 * Game.SCALE);
 		int playX = (int) (440 * Game.SCALE);
@@ -34,7 +34,7 @@ public class GameOverOverlay {
 		menu = new UrmButton(menuX, y, URM_SIZE, URM_SIZE, 2);
 
 	}
-
+	
 	private void createImg() {
 		img = LoadSave.GetSpriteAtlas(LoadSave.DEATH_SCREEN);
 		imgW = (int) (img.getWidth() * Game.SCALE);
@@ -42,7 +42,7 @@ public class GameOverOverlay {
 		imgX = Game.GAME_WIDTH / 2 - imgW / 2;
 		imgY = (int) (100 * Game.SCALE);
 	}
-
+	
 	public void draw(Graphics g) {
 		g.setColor(new Color(0, 0, 0, 200));
 		g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
@@ -51,16 +51,12 @@ public class GameOverOverlay {
 		menu.draw(g);
 		play.draw(g);
 	}
-
+	
 	public void update() {
 		menu.update();
 		play.update();
 	}
-
-	public void keyPressed(KeyEvent e) {
-
-	}
-
+	
 	private boolean isIn(UrmButton b, MouseEvent e) {
 		return b.getBounds().contains(e.getX(), e.getY());
 	}
@@ -97,5 +93,5 @@ public class GameOverOverlay {
 		else if (isIn(play, e))
 			play.setMousePressed(true);
 	}
-
+	
 }
