@@ -69,11 +69,11 @@ public class Player extends Entity {
 		super(x, y, width, height);
 		this.playing = playing;
 		this.state = IDLE;
-		this.maxHealth = 35;
+		this.maxHealth = 100;
 		this.currentHealth = maxHealth;
 		this.walkSpeed = Game.SCALE * 1.0f;
 		loadAnimations();
-		initHitbox(22, 28);
+		initHitbox(22, 29);
 		initAttackBox();
 	}
 	
@@ -127,8 +127,9 @@ public class Player extends Entity {
 
 		updateAttackBox();
 		if (state == HIT) {
-			if (aniIndex <= GetSpriteAmount(state) - 2)
-				pushBack(pushBackDir, lvlData, 1.25f);
+			if (aniIndex <= GetSpriteAmount(HIT))
+				pushBack(pushBackDir, lvlData, 1.5f);
+				
 			updatePushBackDrawOffset();
 		} else
 			updatePos();
@@ -183,7 +184,7 @@ public class Player extends Entity {
 	}
 
 	private void updateAttackBox() {
-		if (right && left) {
+		if (right && left || attacking&&!right || attacking && !left ) {
 			if (flipW == 1) {
 				setAttackBoxOnRightSide();
 			} else {
@@ -237,19 +238,20 @@ public class Player extends Entity {
 		if (aniTick >= ANI_SPEED) {
 			aniTick = 0;
 			aniIndex++;
+			if(state == HIT) {
+				aniIndex = 1;
+				attacking = false;
+				attackChecked = false;
+			
+				if (!IsFloor(hitbox, 0, lvlData)) {
+					inAir = true;
+					newState(FALLING);
+				}else 	newState(IDLE);
+			}
 			if (aniIndex >= GetSpriteAmount(playerAction)) {
 				aniIndex = 0;
 				attacking = false;
 				attackChecked = false;
-				if (state == HIT) {
-					newState(IDLE);
-					if (!IsFloor(hitbox, 0, lvlData)) {
-						inAir = true;
-						state = FALLING;
-					}
-						
-					
-				}
 			}
 
 		}

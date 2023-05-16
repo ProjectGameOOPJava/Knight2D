@@ -38,7 +38,7 @@ public abstract class Entity {
 	
 	protected void updatePushBackDrawOffset() {
 		float speed = 0.95f;
-		float limit = -30f;
+		float limit = -10f;
 
 		if (pushBackOffsetDir == UP) {
 			pushDrawOffset -= speed;
