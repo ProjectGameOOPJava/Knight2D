@@ -23,7 +23,7 @@ public class Player extends Entity {
 	private boolean left, right, jump;
 	private int[][] lvlData;
 	private float xDrawOffset = 45 * Game.SCALE;
-	private float yDrawOffset = 51 * Game.SCALE;
+	private float yDrawOffset = 50 * Game.SCALE;
 	
 	// Jumping / Gravity
 		private float jumpSpeed = -2.25f * Game.SCALE;
@@ -73,7 +73,7 @@ public class Player extends Entity {
 		this.currentHealth = maxHealth;
 		this.walkSpeed = Game.SCALE * 1.0f;
 		loadAnimations();
-		initHitbox(22, 29);
+		initHitbox(22, 28);
 		initAttackBox();
 	}
 	
@@ -87,6 +87,11 @@ public class Player extends Entity {
 	private void initAttackBox() {
 			attackBox = new Rectangle2D.Float(x, y, (int) (35 * Game.SCALE), (int) (20 * Game.SCALE));
 			resetAttackBox();
+	}
+	
+
+	protected void initHitbox(float x, float y, float width, float height) {
+		hitbox = new Rectangle2D.Float(x, y, width, height);
 	}
 
 	public void update() {
@@ -128,7 +133,7 @@ public class Player extends Entity {
 		updateAttackBox();
 		if (state == HIT) {
 			if (aniIndex <= GetSpriteAmount(HIT))
-				pushBack(pushBackDir, lvlData, 1.5f);
+				pushBack(pushBackDir, lvlData, 2.5f);
 				
 			updatePushBackDrawOffset();
 		} else
@@ -217,7 +222,7 @@ public class Player extends Entity {
 		g.drawImage(animations[state][aniIndex], 
 				(int) (hitbox.x - xDrawOffset) - lvlOffset + flipX, 
 				(int) (hitbox.y - yDrawOffset + + (int) (pushDrawOffset)), width * flipW, height, null);
-		//drawHitbox(g, lvlOffset);
+		drawHitbox(g, lvlOffset);
 		drawAttackBox(g, lvlOffset);
 		drawUI(g);
 	}
@@ -408,7 +413,7 @@ public class Player extends Entity {
 		pushBackOffsetDir = UP;
 		pushDrawOffset = 0;
 
-		if (e.getHitbox().x < hitbox.x)
+		if (e.getHitbox().x < hitbox.x && e.getHitbox().x + e.getHitbox().width < hitbox.x + hitbox.width)
 			pushBackDir = RIGHT;
 		else
 			pushBackDir = LEFT;
@@ -467,6 +472,10 @@ public class Player extends Entity {
 	
 	public void setJump(boolean jump) {
 		this.jump = jump;
+	}
+	
+	public void setPushBackDir (int pushBackDir) {
+		this.pushBackDir = pushBackDir;
 	}
 	
 	public void resetAll() {

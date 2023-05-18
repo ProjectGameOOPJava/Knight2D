@@ -12,6 +12,7 @@ import levels.Level;
 import main.Game;
 import utilz.LoadSave;
 import static utilz.Constants.ObjectConstants.*;
+import static utilz.Constants.Directions;
 import static utilz.HelpMethods.CanCannonSeePlayer;
 import static utilz.HelpMethods.IsProjectileHittingLevel;
 import static utilz.Constants.Projectiles.*;
@@ -120,7 +121,7 @@ public class ObjectManager {
 				gc.update();
 
 		updateCannons(lvlData, player);
-		updateProjectiles(lvlData, player);
+		updateProjectiles(lvlData , player);
 
 	}
 
@@ -129,13 +130,18 @@ public class ObjectManager {
 			if (p.isActive()) {
 				p.updatePos();
 				if (p.getHitbox().intersects(player.getHitbox())) {
-					player.changeHealth(-25);
+					
+					if(p.getDir() == 1) player.setPushBackDir(2);
+					else player.setPushBackDir(0);
+					
+					player.changeHealth(-5);
 					p.setActive(false);
-				} else if (IsProjectileHittingLevel(p, lvlData))
+				} else if (IsProjectileHittingLevel(p, lvlData) )
+					
 					p.setActive(false);
 			}
 	}
-
+	
 	private boolean isPlayerInRange(Cannon c, Player player) {
 		int absValue = (int) Math.abs(player.getHitbox().x - c.getHitbox().x);
 		return absValue <= Game.TILES_SIZE * 5;
@@ -143,11 +149,18 @@ public class ObjectManager {
 
 	private boolean isPlayerInfrontOfCannon(Cannon c, Player player) {
 		if (c.getObjType() == CANNON_LEFT) {
-			if (c.getHitbox().x > player.getHitbox().x)
+			
+			if (c.getHitbox().x > player.getHitbox().x ) {
+				
 				return true;
-
-		} else if (c.getHitbox().x < player.getHitbox().x)
-			return true;
+			}
+		} else{
+			
+			if (c.getHitbox().x < player.getHitbox().x) {
+				
+				return true;
+			}
+		}
 		return false;
 	}
 

@@ -51,7 +51,13 @@ public class Boar extends Enemy {
 				}
 				move(lvlData, playing);
 				break;
+				
 			case ATTACK:
+				
+				if(!attackChecked) {
+					checkPlayerHit(hitbox, playing.getPlayer());
+					attackChecked = false;
+				}
 				
 				if (preRush) {
 					if (aniIndex >= 3)

@@ -42,5 +42,9 @@ public class Projectile {
 	public boolean isActive() {
 		return active;
 	}
+	
+	public int getDir() {
+		return dir;
+	}
 
 }

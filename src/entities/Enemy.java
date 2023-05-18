@@ -120,7 +120,7 @@ public abstract class Enemy extends Entity {
 			case BOAR:
 				return absValue <= attackDistance * 2;
 			case BEE: 
-				return absValue <= attackDistance *2;
+				return absValue <= attackDistance;
 		}
 		return false;
 	}
@@ -139,8 +139,12 @@ public abstract class Enemy extends Entity {
 	}
 
 	protected void checkPlayerHit(Rectangle2D.Float attackBox, Player player) {
-		if (attackBox.intersects(player.hitbox))
+		if (attackBox.intersects(player.hitbox)) {
+			
 			player.changeHealth(-GetEnemyDmg(enemyType), this);
+			
+		}
+			
 		else {
 			if (enemyType == BEE)
 				return;
@@ -148,6 +152,8 @@ public abstract class Enemy extends Entity {
 		attackChecked = true;
 
 	}
+	
+	
 		
 	protected void updateAnimationTick() {
 		aniTick++;
@@ -168,8 +174,10 @@ public abstract class Enemy extends Entity {
 				
 					}
 				}else if (enemyType == BOAR) {
-					if (state == ATTACK)
+					if (state == ATTACK) {
 						aniIndex = 3;
+					}
+						
 					else {
 						aniIndex = 0;
 						if (state == HIT) {

@@ -277,7 +277,7 @@ public class Playing extends State implements Statemethods {
 		if (levelManager.getLevelIndex() + 1 >= levelManager.getAmountOfLevels()) {
 			// No more levels
 			gameCompleted = true;
-			levelManager.setLevelIndex(-1);
+			levelManager.setLevelIndex(0);
 			levelManager.loadNextLevel();
 			resetAll();
 			return;
