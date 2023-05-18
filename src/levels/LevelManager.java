@@ -23,7 +23,7 @@ public class LevelManager {
 	}
 
 	public void loadNextLevel() {
-		lvlIndex++;
+			lvlIndex++;
 		if (lvlIndex >= levels.size()) {
 			//System.out.println(lvlIndex + "and" + levels.size());
 			lvlIndex = 0;
