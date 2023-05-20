@@ -121,6 +121,8 @@ public abstract class Enemy extends Entity {
 				return absValue <= attackDistance * 2;
 			case BEE: 
 				return absValue <= attackDistance;
+			case BOSS:
+				return absValue <= attackDistance;
 		}
 		return false;
 	}
@@ -161,7 +163,7 @@ public abstract class Enemy extends Entity {
 			aniTick = 0;
 			aniIndex++;
 			if (aniIndex >= GetSpriteAmount(enemyType, state)) {
-				if (enemyType == SNAIL || enemyType == BEE) {
+				if (enemyType == SNAIL || enemyType == BEE ) {
 					aniIndex = 0;
 				switch (state) {
 				case ATTACK:
@@ -185,9 +187,35 @@ public abstract class Enemy extends Entity {
 							if(currentHealth <= 0 ) active = false;
 						} 
 					}
+				}else if (enemyType == BOSS) {
+					
+					aniIndex = 0;
+					switch (state) {
+					case IDLE:
+						heal(30);
+						break;
+					case ATTACK:
+						heal(50);
+						System.out.println(currentHealth);
+						state = IDLE;
+						break;
+					case HIT:
+						state = RUNNING;
+						if(currentHealth <= 0 ) {
+							state = DEATH;
+							active = false;
+						}
+						break;
+					case DEATH: active = false;
+						}
 				}
 			}
 		}
+	}
+	
+	protected void heal(int value) {
+		currentHealth += value;
+		if(currentHealth >= maxHealth) currentHealth = maxHealth;
 	}
 
 	protected void changeWalkDir() {

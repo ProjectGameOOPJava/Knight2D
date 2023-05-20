@@ -115,14 +115,18 @@ public class Constants {
 		public static final int SNAIL = 1;
 		public static final int BEE = 2;
 		public static final int BOAR = 0;
+		public static final int BOSS = 150;
 		
 		public static final int RUNNING = 0;
 		public static final int ATTACK = 1;
 		public static final int HIT = 2;
+		public static final int RUSH = 3;
+		public static final int DEATH = 4;
+		public static final int FALLING = 5;
+		public static final int IDLE = 6;
 
 		public static final int SNAIL_WIDTH_DEFAULT = 48;
 		public static final int SNAIL_HEIGHT_DEFAULT = 34;
-
 		public static final int SNAIL_WIDTH = (int) (SNAIL_WIDTH_DEFAULT * Game.SCALE);
 		public static final int SNAIL_HEIGHT = (int) (SNAIL_HEIGHT_DEFAULT * Game.SCALE);
 		public static final int SNAIL_DRAWOFFSET_X = (int) (12 * Game.SCALE);
@@ -141,6 +145,13 @@ public class Constants {
 		public static final int BOAR_HEIGHT = (int) (BOAR_HEIGHT_DEFAULT * Game.SCALE);
 		public static final int BOAR_DRAWOFFSET_X = (int) (12 * Game.SCALE);
 		public static final int BOAR_DRAWOFFSET_Y = (int) (12 * Game.SCALE);
+		
+		public static final int BOSS_WIDTH_DEFAULT = 120;
+		public static final int BOSS_HEIGHT_DEFAULT = 82;
+		public static final int BOSS_WIDTH = (int) (BOSS_WIDTH_DEFAULT * Game.SCALE);
+		public static final int BOSS_HEIGHT = (int) (BOSS_HEIGHT_DEFAULT * Game.SCALE);
+		public static final int BOSS_DRAWOFFSET_X = (int) (45 * Game.SCALE);
+		public static final int BOSS_DRAWOFFSET_Y = (int) (50 * Game.SCALE);
 		
 		public static int GetSpriteAmount(int enemy_type, int enemy_state) {
 
@@ -174,6 +185,24 @@ public class Constants {
 				case HIT:
 					return 4;
 				}
+				
+			case BOSS:
+				switch (enemy_state) {
+				case RUNNING:
+					return 10;
+				case ATTACK:
+					return 10;
+				case HIT:
+					return 1;
+				case RUSH:
+					return 2;
+				case DEATH:
+					return 10;
+				case FALLING:
+					return 3;
+				case IDLE:
+					return 10;
+				}
 			}
 
 			return 0;
@@ -188,6 +217,8 @@ public class Constants {
 				return 1;
 			case BEE: 
 				return 30;
+			case BOSS:
+				return 100;
 			default:
 				return 1;
 			}
@@ -201,11 +232,14 @@ public class Constants {
 				return 1;
 			case BEE:
 				return 30;
+			case BOSS:
+				return 30;
 			default:
 				return 0;
 			}
 
 		}
+		
 		
 	}
 
