@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+import entities.Boss;
 import entities.Enemy;
 import entities.EnemyManager;
 import entities.Entity;
@@ -15,6 +16,7 @@ import levels.LevelManager;
 import levels.Level;
 import main.Game;
 import objects.ObjectManager;
+import objects.Projectile;
 import ui.GameCompletedOverlay;
 import ui.GameOverOverlay;
 import ui.LevelCompletedOverlay;
@@ -23,6 +25,7 @@ import utilz.LoadSave;
 
 public class Playing extends State implements Statemethods {
 	private Player player;
+	private Boss boss;
 	private Enemy enemy;
 	private LevelManager levelManager;
 	private EnemyManager enemyManager;
@@ -168,6 +171,10 @@ public class Playing extends State implements Statemethods {
 	public void checkObjectHit(Rectangle2D.Float attackBox) {
 		objectManager.checkObjectHit(attackBox);
 	}
+	
+	public void checkObjectHit(Projectile slash) {
+		objectManager.checkObjectHit(slash.getHitbox());
+	}
 
 	public void checkPotionTouched(Rectangle2D.Float hitbox) {
 		objectManager.checkObjectTouched(hitbox);
@@ -283,7 +290,7 @@ public class Playing extends State implements Statemethods {
 
 	public void setLevelCompleted(boolean levelCompleted) {
 		game.getAudioPlayer().lvlCompleted();
-		if (levelManager.getLevelIndex() + 1 >= levelManager.getAmountOfLevels()) {
+		if (levelManager.getLevelIndex() >= levelManager.getAmountOfLevels()) {
 			// No more levels
 			gameCompleted = true;
 			levelManager.setLevelIndex(0);

@@ -14,7 +14,7 @@ import static utilz.Constants.EnemyConstants.*;
 public class EnemyManager {
 
 	private Playing playing;
-	private BufferedImage[][] snailArr, boarArr, beeArr;
+	private BufferedImage[][] snailArr, boarArr, beeArr, bossArr;
 	private Level currentLevel;
 
 	public EnemyManager(Playing playing) {
@@ -47,6 +47,12 @@ public class EnemyManager {
 				isAnyActive = true;
 			}
 		
+		for (Boss boss : currentLevel.getBosses())
+			if (boss.isActive()) {
+				boss.update(lvlData, playing);
+				isAnyActive = true;
+			}
+		
 		if(!isAnyActive)
 			playing.setLevelCompleted(true);
 	}
@@ -55,6 +61,7 @@ public class EnemyManager {
 		drawSnails(g, xLvlOffset);
 		drawBees(g, xLvlOffset);
 		drawBoars(g, xLvlOffset);
+		drawBosses(g, xLvlOffset);
 	}
 
 	private void drawSnails(Graphics g, int xLvlOffset) {
@@ -88,6 +95,18 @@ public class EnemyManager {
 				p.drawHitbox(g, xLvlOffset);
 			}
 		}
+	
+	private void drawBosses(Graphics g, int xLvlOffset) {
+		for (Boss boss : currentLevel.getBosses())
+			if (boss.isActive()) {
+				g.drawImage(bossArr[boss.getState()][boss.getAniIndex()], 
+						(int) boss.getHitbox().x - xLvlOffset - BOSS_DRAWOFFSET_X + boss.flipX(),
+						(int) boss.getHitbox().y - BOSS_DRAWOFFSET_Y + (int) boss.getPushDrawOffset(), BOSS_WIDTH * boss.flipW(), BOSS_HEIGHT, null);
+				boss.drawHitbox(g, xLvlOffset);
+				boss.drawAttackBox(g, xLvlOffset);
+				boss.drawUI(g);
+			}
+		}
 
 	public void checkEnemyHit(Rectangle2D.Float attackBox) {
 		for (Snail c : currentLevel.getSnails())
@@ -115,6 +134,16 @@ public class EnemyManager {
 				if (s.getState() != HIT)
 					if (attackBox.intersects(s.getHitbox())) {
 						s.hurt(20);
+						return;
+			
+					}
+			}
+		
+		for (Boss boss : currentLevel.getBosses())
+			if (boss.isActive()) {
+				if (boss.getState() != HIT)
+					if (attackBox.intersects(boss.getHitbox())) {
+						boss.hurt(10);
 						return;
 			
 					}
@@ -151,6 +180,16 @@ public class EnemyManager {
 			
 					}
 			}
+		
+		for (Boss boss : currentLevel.getBosses())
+			if (boss.isActive()) {
+				if (boss.getState() != HIT)
+					if (projectile.getHitbox().intersects(boss.getHitbox())) {
+						boss.hurt(1);
+						return;
+			
+					}
+			}
 	}
 
 
@@ -158,6 +197,7 @@ public class EnemyManager {
 		snailArr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.SNAIL_ATLAS), 8, 3, SNAIL_WIDTH_DEFAULT, SNAIL_HEIGHT_DEFAULT);
 		beeArr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.BEE_ATLAS), 4, 3, BEE_WIDTH_DEFAULT, BEE_HEIGHT_DEFAULT);
 		boarArr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.BOAR_ATLAS),6, 3, BOAR_WIDTH_DEFAULT, BOAR_HEIGHT_DEFAULT);
+		bossArr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.BOSS_ATLAS), 10, 7,BOSS_WIDTH_DEFAULT, BOSS_HEIGHT_DEFAULT);
 	}
 	
 	private BufferedImage[][] getImgArr(BufferedImage atlas, int xSize, int ySize, int spriteW, int spriteH) {
@@ -175,5 +215,7 @@ public class EnemyManager {
 			p.resetEnemy();
 		for (Boar s : currentLevel.getBoars())
 			s.resetEnemy();
+		for (Boss boss : currentLevel.getBosses())
+			boss.resetEnemy();
 	}
 }

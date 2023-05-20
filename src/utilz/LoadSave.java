@@ -25,6 +25,7 @@ public class LoadSave {
 	public static final String SNAIL_ATLAS = "snailsheet.png";
 	public static final String BEE_ATLAS = "beesheet.png";
 	public static final String BOAR_ATLAS = "boarsheet.png";
+	public static final String BOSS_ATLAS = "bosssheet.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
 	public static final String COMPLETED_IMG = "completed_sprite.png";
 	public static final String POTION_ATLAS = "potions_sprites.png";
@@ -36,7 +37,7 @@ public class LoadSave {
 	public static final String OPTIONS_MENU = "options_background.png";
 	public static final String GAME_COMPLETED = "game_completed.png";
 	public static final String SLASH = "unti.png";
-	
+
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;
 		File f = new File("res/" + fileName);
@@ -51,7 +52,7 @@ public class LoadSave {
 
 	public static BufferedImage[] GetAllLevels() {
 
-		List<String> levelNames = Arrays.asList("1.png", "2.png", "3.png");
+		List<String> levelNames = Arrays.asList("1.png", "2.png", "3.png","4.png");
 
 		BufferedImage[] imgs = new BufferedImage[levelNames.size()];
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import entities.Snail;
 import entities.Bee;
 import entities.Boar;
+import entities.Boss;
 import main.Game;
 import objects.Cannon;
 import objects.GameContainer;
@@ -25,6 +26,7 @@ public class Level {
 	private ArrayList<Snail> snails = new ArrayList<>();
 	private ArrayList<Bee> bees = new ArrayList<>();
 	private ArrayList<Boar> boars = new ArrayList<>();
+	private ArrayList<Boss> bosses = new ArrayList<>();
 	private ArrayList<Potion> potions = new ArrayList<>();
 	private ArrayList<Spike> spikes = new ArrayList<>();
 	private ArrayList<GameContainer> containers = new ArrayList<>();
@@ -34,7 +36,8 @@ public class Level {
 	private int maxTilesOffset;
 	private int maxLvlOffsetX;
 	private Point playerSpawn;
-
+	
+	
 	public Level(BufferedImage img) {
 		this.img = img;
 		lvlData = new int[img.getHeight()][img.getWidth()];
@@ -74,6 +77,9 @@ public class Level {
 			break;
 		case BOAR:
 			boars.add(new Boar(x * Game.TILES_SIZE, y * Game.TILES_SIZE));
+			break;
+		case BOSS:
+			bosses.add(new Boss(x * Game.TILES_SIZE, y * Game.TILES_SIZE));
 			break;
 		case 100: 
 			playerSpawn = new Point(x * Game.TILES_SIZE, y * Game.TILES_SIZE);
@@ -119,6 +125,10 @@ public class Level {
 	
 	public Point getPlayerSpawn() {
 		return playerSpawn;
+	}
+	
+	public ArrayList<Boss> getBosses() {
+		return bosses;
 	}
 	
 	public int getLvlOffset() {
