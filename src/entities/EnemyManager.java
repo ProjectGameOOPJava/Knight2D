@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import gamestates.Playing;
 import levels.Level;
+import objects.Projectile;
 import utilz.LoadSave;
 import static utilz.Constants.EnemyConstants.*;
 
@@ -119,6 +120,39 @@ public class EnemyManager {
 					}
 			}
 	}
+	
+	public void checkEnemyHit(Projectile projectile) {
+		for (Snail c : currentLevel.getSnails())
+			if (c.isActive())
+				if (c.getState() != HIT)
+					if (projectile.getHitbox().intersects(c.getHitbox())) {
+						c.hurt(100);
+						return;
+				}
+		for (Bee p : currentLevel.getBees())
+			if (p.isActive()) {
+				if (p.getState() == ATTACK && p.getAniIndex() >= 3)
+					return;
+				else {
+					if (p.getState() != HIT)
+						if (projectile.getHitbox().intersects(p.getHitbox())) {
+							p.hurt(100);
+							return;
+						}
+				}
+			}
+
+		for (Boar s : currentLevel.getBoars())
+			if (s.isActive()) {
+				if (s.getState() != HIT)
+					if (projectile.getHitbox().intersects(s.getHitbox())) {
+						s.hurt(100);
+						return;
+			
+					}
+			}
+	}
+
 
 	private void loadEnemyImgs() {
 		snailArr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.SNAIL_ATLAS), 8, 3, SNAIL_WIDTH_DEFAULT, SNAIL_HEIGHT_DEFAULT);

@@ -35,7 +35,8 @@ public class LoadSave {
 	public static final String DEATH_SCREEN = "death_screen.png";
 	public static final String OPTIONS_MENU = "options_background.png";
 	public static final String GAME_COMPLETED = "game_completed.png";
-
+	public static final String SLASH = "unti.png";
+	
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;
 		File f = new File("res/" + fileName);

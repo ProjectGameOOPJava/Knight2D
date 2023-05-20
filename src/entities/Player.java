@@ -19,7 +19,7 @@ import utilz.LoadSave;
 public class Player extends Entity {
 	private BufferedImage[][] animations;
 	private int playerAction = IDLE;
-	private boolean moving = false, attacking = false, powerAttack = false;
+	private boolean moving = false, attacking = false, powerAttack = false, slashActive = false;
 	private boolean left, right, jump;
 	private int[][] lvlData;
 	private float xDrawOffset = 45 * Game.SCALE;
@@ -152,8 +152,14 @@ public class Player extends Entity {
 			}
 		
 		}
-		if (attacking || powerAttackActive)
+		if (attacking || powerAttackActive) {
+			slashActive = false;
 			checkAttack();
+		}
+			
+		if (slashActive) {
+			 playing.getObjectManager().playerSlash(this);
+		}
 		
 		updateAnimationTick();
 		setAnimation();
@@ -180,7 +186,7 @@ public class Player extends Entity {
 		attackChecked = false;
 		if (aniIndex == 1 || aniIndex == 6) {
 			attackChecked = true;
-			if (powerAttackActive)
+			if (powerAttackActive && slashActive)
 				attackChecked = false;
 			playing.checkEnemyHit(attackBox);
 			playing.checkObjectHit(attackBox);
@@ -247,6 +253,7 @@ public class Player extends Entity {
 				aniIndex = 1;
 				attacking = false;
 				attackChecked = false;
+				slashActive = false;
 			
 				if (!IsFloor(hitbox, 0, lvlData)) {
 					inAir = true;
@@ -257,6 +264,7 @@ public class Player extends Entity {
 				aniIndex = 0;
 				attacking = false;
 				attackChecked = false;
+				slashActive = false;
 			}
 
 		}
@@ -299,6 +307,12 @@ public class Player extends Entity {
 			}
 		}
 		
+		if(slashActive) {
+			state = ATTACK;
+			return;
+			
+		}
+		
 		if (startAni != state)
 			resetAniTick();
 	}
@@ -315,8 +329,10 @@ public class Player extends Entity {
 			jump();
 		if (!inAir)
 			if (!powerAttackActive)
-				if ((!left && !right) || (right && left) || (left && attacking)
-						|| (right && attacking))
+				if ((!left && !right) || (right && left) 
+						|| (left && attacking ) || (right && attacking)
+						|| (attacking && slashActive))
+					
 					return;
 
 		float xSpeed = 0;
@@ -474,8 +490,24 @@ public class Player extends Entity {
 		this.jump = jump;
 	}
 	
+	public boolean isSlash() {
+		return slashActive;
+	}
+	
 	public void setPushBackDir (int pushBackDir) {
 		this.pushBackDir = pushBackDir;
+	}
+	
+	public int getFlipX() {
+		return flipX;
+	}
+	
+	public int getFLipW() {
+		return flipW;
+	}
+	
+	public int getWidth() {
+		return width;
 	}
 	
 	public void resetAll() {
@@ -488,6 +520,7 @@ public class Player extends Entity {
 		airSpeed = 0f;
 		currentHealth = maxHealth;
 		powerAttackActive = false;
+		slashActive = false;
 		powerAttackTick = 0;
 		powerValue = powerMaxValue;
 		
@@ -518,5 +551,17 @@ public class Player extends Entity {
 		}
 
 	}
+	
+	public void setSlash(boolean slash) {
+		
+		if(slashActive) return;
+		
+		if(!inAir)
+			if(powerValue >=90) {
+				slashActive = true;
+				changePower(-200);
+				playing.getGame().getAudioPlayer().playEffect(AudioPlayer.ATTACK_THREE);
+			}
+		}
 	
 }
