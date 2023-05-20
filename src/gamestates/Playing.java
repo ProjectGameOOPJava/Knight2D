@@ -7,7 +7,9 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
+import entities.Enemy;
 import entities.EnemyManager;
+import entities.Entity;
 import entities.Player;
 import levels.LevelManager;
 import levels.Level;
@@ -21,6 +23,7 @@ import utilz.LoadSave;
 
 public class Playing extends State implements Statemethods {
 	private Player player;
+	private Enemy enemy;
 	private LevelManager levelManager;
 	private EnemyManager enemyManager;
 	private ObjectManager objectManager;
@@ -198,6 +201,9 @@ public class Playing extends State implements Statemethods {
 				case KeyEvent.VK_R:
 					player.setPowerAttack(true);
 					break;
+				case KeyEvent.VK_U:
+					player.setSlash(true);
+					break;
 				case KeyEvent.VK_BACK_SPACE:
 					Gamestate.state = Gamestate.MENU;
 					break;
@@ -222,6 +228,9 @@ public class Playing extends State implements Statemethods {
 					break;
 				case KeyEvent.VK_R:
 					player.setPowerAttack(true);
+					break;
+				case KeyEvent.VK_U:
+					player.setSlash(true);
 					break;
 				case KeyEvent.VK_ESCAPE:
 					paused = !paused;
@@ -300,6 +309,10 @@ public class Playing extends State implements Statemethods {
 
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public Enemy enemy() {
+		return enemy;
 	}
 
 	public EnemyManager getEnemyManager() {

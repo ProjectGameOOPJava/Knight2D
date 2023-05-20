@@ -8,12 +8,25 @@ public class Constants {
 	public static final int ANI_SPEED = 25;
 	
 	public static class Projectiles{
+		
+		public static final int CANNON = 0;
 		public static final int CANNON_BALL_DEFAULT_WIDTH = 15;
 		public static final int CANNON_BALL_DEFAULT_HEIGHT = 15;
 
 		public static final int CANNON_BALL_WIDTH = (int)(Game.SCALE * CANNON_BALL_DEFAULT_WIDTH);
 		public static final int CANNON_BALL_HEIGHT = (int)(Game.SCALE * CANNON_BALL_DEFAULT_HEIGHT);
 		public static final float SPEED = 0.75f * Game.SCALE;
+		
+			
+		public static final int SLASH = 1;
+			
+		public static final int SLASH_WIDTH_DEFAULT = 40;
+		public static final int SLASH_HEIGHT_DEFAULT = 26;
+		public static final int SLASH_WIDTH = (int) (SLASH_WIDTH_DEFAULT * Game.SCALE);
+		public static final int SLASH_HEIGHT = (int) (SLASH_HEIGHT_DEFAULT * Game.SCALE);
+			
+		public static final float SPEED_SLASH = 10.0f * Game.SCALE;
+			
 	}
 	
 	public static class ObjectConstants {
@@ -172,7 +185,7 @@ public class Constants {
 			case SNAIL:
 				return 1;
 			case BOAR:
-				return 50;
+				return 1;
 			case BEE: 
 				return 30;
 			default:
@@ -185,7 +198,7 @@ public class Constants {
 			case SNAIL:
 				return 0;
 			case BOAR: 
-				return 10;
+				return 1;
 			case BEE:
 				return 30;
 			default:
@@ -218,12 +231,13 @@ public class Constants {
 
 		public static int GetSpriteAmount(int player_action) {
 			switch (player_action) {
+				
 				case RUNNING:
 					return 10;
 				case IDLE:
 					return 10;
 				case HIT:
-					return 3;
+					return 1;
 				case JUMP:
 					return 3;
 				case GROUND:

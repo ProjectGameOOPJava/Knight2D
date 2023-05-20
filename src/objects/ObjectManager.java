@@ -22,10 +22,12 @@ public class ObjectManager {
 	private Playing playing;
 	private BufferedImage[][] potionImgs, containerImgs;
 	private BufferedImage[] cannonImgs;
-	private BufferedImage spikeImg, cannonBallImg;
+	private BufferedImage spikeImg, cannonBallImg, slashImg;
 	private ArrayList<Potion> potions;
 	private ArrayList<GameContainer> containers;
 	private ArrayList<Projectile> projectiles = new ArrayList<>();
+	private Projectile slash;
+	private int flipXSlash = 0, flipWSlash = 1;
 
 	private Level currentLevel;
 
@@ -33,6 +35,7 @@ public class ObjectManager {
 		this.playing = playing;
 		currentLevel = playing.getLevelManager().getCurrentLevel();
 		loadImgs();
+		
 	}
 
 	public void checkSpikesTouched(Player p) {
@@ -109,6 +112,7 @@ public class ObjectManager {
 			cannonImgs[i] = temp.getSubimage(i * 40, 0, 40, 26);
 
 		cannonBallImg = LoadSave.GetSpriteAtlas(LoadSave.CANNON_BALL);
+		slashImg = LoadSave.GetSpriteAtlas(LoadSave.SLASH);
 	}
 
 	public void update(int[][] lvlData, Player player){
@@ -122,7 +126,7 @@ public class ObjectManager {
 
 		updateCannons(lvlData, player);
 		updateProjectiles(lvlData , player);
-
+		updateSlashes( lvlData);
 	}
 
 	private void updateProjectiles(int[][] lvlData, Player player) {
@@ -141,6 +145,19 @@ public class ObjectManager {
 					p.setActive(false);
 			}
 	}
+	
+	private void updateSlashes(int[][] lvlData) {
+		
+			if (slash != null && slash.isActive()) {
+					slash.updatePos();
+					playing.getEnemyManager().checkEnemyHit(slash);
+				}
+			if (slash != null && IsProjectileHittingLevel(slash, lvlData))
+					
+					slash.setActive(false);
+		
+	}
+
 	
 	private boolean isPlayerInRange(Cannon c, Player player) {
 		int absValue = (int) Math.abs(player.getHitbox().x - c.getHitbox().x);
@@ -180,11 +197,28 @@ public class ObjectManager {
 	}
 
 	private void shootCannon(Cannon c) {
+		int type = CANNON;
 		int dir = 1;
 		if (c.getObjType() == CANNON_LEFT)
 			dir = -1;
 
-		projectiles.add(new Projectile((int) c.getHitbox().x, (int) c.getHitbox().y, dir));
+		projectiles.add(new Projectile(type, (int) c.getHitbox().x, (int) c.getHitbox().y, dir));
+	}
+	
+	public void playerSlash(Player player) {
+	    int type = SLASH;
+	    int dir = -1;
+	    if (playing.getPlayer().getFlipX() == player.getWidth()) {
+	        dir = -1;
+	        flipXSlash = SLASH_WIDTH;
+	        flipWSlash = -1;
+	    } else {
+	        dir = 1;
+	        flipXSlash = 0;
+	        flipWSlash = 1;
+	    }
+
+	    slash = new Projectile(type, (int) player.getHitbox().x, (int) player.getHitbox().y, dir);
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
@@ -193,13 +227,25 @@ public class ObjectManager {
 		drawTraps(g, xLvlOffset);
 		drawCannons(g, xLvlOffset);
 		drawProjectiles(g, xLvlOffset);
+		if(slash != null)
+		drawSlash(g, xLvlOffset);
 	}
 
 	private void drawProjectiles(Graphics g, int xLvlOffset) {
 		for (Projectile p : projectiles)
 			if (p.isActive())
 				g.drawImage(cannonBallImg, (int) (p.getHitbox().x - xLvlOffset), (int) (p.getHitbox().y), CANNON_BALL_WIDTH, CANNON_BALL_HEIGHT, null);
+			
 	}
+	
+	private void drawSlash(Graphics g, int xLvlOffset) {
+	    if (slash != null && slash.isActive()) 
+
+	        g.drawImage(slashImg, (int) (slash.getHitbox().x - xLvlOffset) + flipXSlash, (int) (slash.getHitbox().y),
+	                SLASH_WIDTH * flipWSlash, SLASH_HEIGHT, null);
+	    }
+	
+
 
 	private void drawCannons(Graphics g, int xLvlOffset) {
 		for (Cannon c : currentLevel.getCannons()) {
