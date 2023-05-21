@@ -12,7 +12,6 @@ import levels.Level;
 import main.Game;
 import utilz.LoadSave;
 import static utilz.Constants.ObjectConstants.*;
-import static utilz.Constants.Directions;
 import static utilz.HelpMethods.CanCannonSeePlayer;
 import static utilz.HelpMethods.IsProjectileHittingLevel;
 import static utilz.Constants.Projectiles.*;
@@ -151,6 +150,7 @@ public class ObjectManager {
 			if (slash != null && slash.isActive()) {
 					slash.updatePos();
 					playing.getEnemyManager().checkEnemyHit(slash);
+					playing.checkObjectHit(slash);
 				}
 			if (slash != null && IsProjectileHittingLevel(slash, lvlData))
 					

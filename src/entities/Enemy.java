@@ -110,6 +110,7 @@ public abstract class Enemy extends Entity {
 	
 	protected boolean isPlayerInRange(Player player) {
 		int absValue = (int) Math.abs(player.hitbox.x - hitbox.x);
+		if(enemyType == BOSS) return absValue <= attackDistance * 10;
 		return absValue <= attackDistance * 5;
 	}
 	
@@ -118,11 +119,11 @@ public abstract class Enemy extends Entity {
 		switch(enemyType) {
 			case SNAIL: break;
 			case BOAR:
-				return absValue <= attackDistance * 2;
+				return absValue <= attackDistance * 5;
 			case BEE: 
-				return absValue <= attackDistance;
+				return absValue <= attackDistance * 2;
 			case BOSS:
-				return absValue <= attackDistance;
+				return absValue <= attackDistance * 3;
 		}
 		return false;
 	}
@@ -192,15 +193,16 @@ public abstract class Enemy extends Entity {
 					aniIndex = 0;
 					switch (state) {
 					case IDLE:
-						heal(30);
+						heal(50);
 						break;
 					case ATTACK:
-						heal(50);
 						System.out.println(currentHealth);
 						state = IDLE;
 						break;
 					case HIT:
-						state = RUNNING;
+						state = IDLE;
+						if(currentHealth == 150 || currentHealth == 100 ||
+								currentHealth == 50 || currentHealth == 25) state = ATTACK;
 						if(currentHealth <= 0 ) {
 							state = DEATH;
 							active = false;

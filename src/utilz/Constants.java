@@ -39,8 +39,8 @@ public class Constants {
 		public static final int CANNON_LEFT = 5;
 		public static final int CANNON_RIGHT = 6;
 
-		public static final int RED_POTION_VALUE = 15;
-		public static final int BLUE_POTION_VALUE = 10;
+		public static final int RED_POTION_VALUE = 75;
+		public static final int BLUE_POTION_VALUE = 150;
 
 		public static final int CONTAINER_WIDTH_DEFAULT = 40;
 		public static final int CONTAINER_HEIGHT_DEFAULT = 30;
@@ -214,11 +214,11 @@ public class Constants {
 			case SNAIL:
 				return 1;
 			case BOAR:
-				return 1;
+				return 40;
 			case BEE: 
 				return 30;
 			case BOSS:
-				return 100;
+				return 200;
 			default:
 				return 1;
 			}
@@ -229,9 +229,9 @@ public class Constants {
 			case SNAIL:
 				return 0;
 			case BOAR: 
-				return 1;
-			case BEE:
 				return 30;
+			case BEE:
+				return 50;
 			case BOSS:
 				return 30;
 			default:

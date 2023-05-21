@@ -7,13 +7,10 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-import entities.Boss;
 import entities.Enemy;
 import entities.EnemyManager;
-import entities.Entity;
 import entities.Player;
 import levels.LevelManager;
-import levels.Level;
 import main.Game;
 import objects.ObjectManager;
 import objects.Projectile;
@@ -21,12 +18,12 @@ import ui.GameCompletedOverlay;
 import ui.GameOverOverlay;
 import ui.LevelCompletedOverlay;
 import ui.PauseOverlay;
+import ui.Tutorial;
 import utilz.LoadSave;
 
 public class Playing extends State implements Statemethods {
 	private Player player;
-	private Boss boss;
-	private Enemy enemy;
+	private Tutorial tutorial;
 	private LevelManager levelManager;
 	private EnemyManager enemyManager;
 	private ObjectManager objectManager;
@@ -50,14 +47,16 @@ public class Playing extends State implements Statemethods {
 	public Playing(Game game) {
 		super(game);
 		initClasses();
-
+		
 		backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
 		calcLvlOffset();
 		loadStartLevel();
 	}
 
 	private void initClasses() {
+		
 		levelManager = new LevelManager(game);
+		tutorial = new Tutorial(this);
 		enemyManager = new EnemyManager(this);
 		objectManager = new ObjectManager(this);
 		player = new Player(200, 200, (int) (120 * Game.SCALE), (int) (82 * Game.SCALE), this);
@@ -128,7 +127,15 @@ public class Playing extends State implements Statemethods {
 		objectManager.draw(g, xLvlOffset);
 		enemyManager.draw(g, xLvlOffset);
 		player.render(g, xLvlOffset);
-	
+		
+		if(levelManager.getLevelIndex() == 0) {
+			tutorial.drawText(g, xLvlOffset);
+		}
+		
+		if(levelManager.getLevelIndex() == 3) {
+			tutorial.drawTextBoss(g, xLvlOffset);
+		}
+		
 		if (paused) {
 			g.setColor(new Color(0, 0, 0, 150));
 			g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
@@ -205,10 +212,10 @@ public class Playing extends State implements Statemethods {
 				case KeyEvent.VK_J:
 					player.setAttacking(true);
 					break;
-				case KeyEvent.VK_R:
+				case KeyEvent.VK_L:
 					player.setPowerAttack(true);
 					break;
-				case KeyEvent.VK_U:
+				case KeyEvent.VK_I:
 					player.setSlash(true);
 					break;
 				case KeyEvent.VK_BACK_SPACE:
@@ -233,10 +240,10 @@ public class Playing extends State implements Statemethods {
 				case KeyEvent.VK_J:
 					player.setAttacking(false);
 					break;
-				case KeyEvent.VK_R:
+				case KeyEvent.VK_L:
 					player.setPowerAttack(true);
 					break;
-				case KeyEvent.VK_U:
+				case KeyEvent.VK_I:
 					player.setSlash(true);
 					break;
 				case KeyEvent.VK_ESCAPE:
@@ -316,10 +323,6 @@ public class Playing extends State implements Statemethods {
 
 	public Player getPlayer() {
 		return player;
-	}
-	
-	public Enemy enemy() {
-		return enemy;
 	}
 
 	public EnemyManager getEnemyManager() {
