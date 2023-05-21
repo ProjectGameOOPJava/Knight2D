@@ -385,9 +385,15 @@ public class Player extends Entity {
 	private void jump() {
 		if (inAir)
 			return;
-		inAir = true;
-		airSpeed = jumpSpeed;
-		playing.getGame().getAudioPlayer().playEffect(AudioPlayer.JUMP);
+		if(powerValue >= 20) {
+			
+			inAir = true;
+			airSpeed = jumpSpeed;
+			changePower(-20);
+			playing.getGame().getAudioPlayer().playEffect(AudioPlayer.JUMP);
+		}
+			
+		
 	}
 
 	private void resetInAir() {
@@ -557,7 +563,7 @@ public class Player extends Entity {
 		if(slashActive) return;
 		
 		if(!inAir)
-			if(powerValue >=90) {
+			if(powerValue >=200) {
 				slashActive = true;
 				changePower(-200);
 				playing.getGame().getAudioPlayer().playEffect(AudioPlayer.ATTACK_THREE);

@@ -3,7 +3,6 @@ package entities;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import gamestates.Playing;
 import levels.Level;
@@ -185,7 +184,7 @@ public class EnemyManager {
 			if (boss.isActive()) {
 				if (boss.getState() != HIT)
 					if (projectile.getHitbox().intersects(boss.getHitbox())) {
-						boss.hurt(1);
+						boss.hurt(0);
 						return;
 			
 					}

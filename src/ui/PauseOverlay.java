@@ -7,11 +7,10 @@ import java.awt.image.BufferedImage;
 import gamestates.Gamestate;
 import gamestates.Playing;
 import main.Game;
-import utilz.Constants;
+
 import utilz.LoadSave;
-import static utilz.Constants.UI.PauseButtons.*;
 import static utilz.Constants.UI.URMButtons.*;
-import static utilz.Constants.UI.VolumeButtons.*;
+
 
 public class PauseOverlay {
 
@@ -19,9 +18,7 @@ public class PauseOverlay {
 	private BufferedImage backgroundImg;
 	private int bgX, bgY, bgW, bgH;
 	private AudioOptions audioOptions;
-	private SoundButton musicButton, sfxButton;
 	private UrmButton menuB, replayB, unpauseB;
-	private VolumeButton volumeButton;
 
 	public PauseOverlay(Playing playing) {
 		this.playing = playing;

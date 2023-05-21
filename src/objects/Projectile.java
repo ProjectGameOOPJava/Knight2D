@@ -2,7 +2,6 @@ package objects;
 
 import java.awt.geom.Rectangle2D;
 
-import entities.Player;
 import main.Game;
 
 import static utilz.Constants.Projectiles.*;
