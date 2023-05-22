@@ -33,12 +33,6 @@ public class HelpMethods {
 		return IsSolid(p.getHitbox().x + p.getHitbox().width / 2, p.getHitbox().y + p.getHitbox().height / 2, lvlData);
 
 	}
-	
-	private static int GetTileValue(float xPos, float yPos, int[][] lvlData) {
-		int xCord = (int) (xPos / Game.TILES_SIZE);
-		int yCord = (int) (yPos / Game.TILES_SIZE);
-		return lvlData[yCord][xCord];
-	}
 
 	public static boolean IsTileSolid(int xTile, int yTile, int[][] lvlData) {
 		int value = lvlData[yTile][xTile];

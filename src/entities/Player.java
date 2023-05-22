@@ -224,11 +224,13 @@ public class Player extends Entity {
 	}
 
 	public void render(Graphics g, int lvlOffset) {
-		g.drawImage(animations[state][aniIndex],
-				(int) (hitbox.x - xDrawOffset) - lvlOffset + flipX,
-				(int) (hitbox.y - yDrawOffset + +(int) (pushDrawOffset)), width * flipW, height, null);
-		// drawHitbox(g, lvlOffset);
-		// drawAttackBox(g, lvlOffset);
+
+		g.drawImage(animations[state][aniIndex], 
+				(int) (hitbox.x - xDrawOffset) - lvlOffset + flipX, 
+				(int) (hitbox.y - yDrawOffset + + (int) (pushDrawOffset)), width * flipW, height, null);
+		//drawHitbox(g, lvlOffset);
+		//drawAttackBox(g, lvlOffset);
+
 		drawUI(g);
 	}
 
@@ -384,15 +386,15 @@ public class Player extends Entity {
 	private void jump() {
 		if (inAir)
 			return;
-		if (powerValue >= 20) {
 
+		if (powerValue >= 20) {
 			inAir = true;
 			airSpeed = jumpSpeed;
 			changePower(-20);
 			playing.getGame().getAudioPlayer().playEffect(AudioPlayer.JUMP);
 		}
 
-	}
+}
 
 	private void resetInAir() {
 		inAir = false;
@@ -563,6 +565,7 @@ public class Player extends Entity {
 
 		if (!inAir)
 			if (powerValue >= 200) {
+
 				slashActive = true;
 				changePower(-200);
 				playing.getGame().getAudioPlayer().playEffect(AudioPlayer.ATTACK_THREE);

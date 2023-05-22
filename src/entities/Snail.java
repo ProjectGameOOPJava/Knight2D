@@ -7,7 +7,6 @@ import static utilz.Constants.Directions.*;
 import static utilz.Constants.*;
 
 import gamestates.Playing;
-import main.Game;
 
 public class Snail extends Enemy {
 	
