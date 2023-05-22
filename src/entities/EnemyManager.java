@@ -67,35 +67,37 @@ public class EnemyManager {
 		for (Snail snail : currentLevel.getSnails())
 			if (snail.isActive()) {
 
-				g.drawImage(snailArr[snail.getState()][snail.getAniIndex()], 
-						(int) snail.getHitbox().x - xLvlOffset - SNAIL_DRAWOFFSET_X + snail.flipX(), 
+				g.drawImage(snailArr[snail.getState()][snail.getAniIndex()],
+						(int) snail.getHitbox().x - xLvlOffset - SNAIL_DRAWOFFSET_X + snail.flipX(),
 						(int) snail.getHitbox().y - SNAIL_DRAWOFFSET_Y + (int) snail.getPushDrawOffset(),
 						SNAIL_WIDTH * snail.flipW(), SNAIL_HEIGHT, null);
-			//snail.drawHitbox(g, xLvlOffset);
-		}
+				// snail.drawHitbox(g, xLvlOffset);
+			}
 
 	}
 
 	private void drawBees(Graphics g, int xLvlOffset) {
 		for (Bee boar : currentLevel.getBees())
 			if (boar.isActive()) {
-        
-				g.drawImage(beeArr[boar.getState()][boar.getAniIndex()], 
+
+				g.drawImage(beeArr[boar.getState()][boar.getAniIndex()],
 						(int) boar.getHitbox().x - xLvlOffset - BEE_DRAWOFFSET_X + boar.flipX(),
-						(int) boar.getHitbox().y - BEE_DRAWOFFSET_Y + (int) boar.getPushDrawOffset(), BEE_WIDTH * boar.flipW(), BEE_HEIGHT, null);
-				//boar.drawHitbox(g, xLvlOffset);
-				//boar.drawAttackBox(g, xLvlOffset);
+						(int) boar.getHitbox().y - BEE_DRAWOFFSET_Y + (int) boar.getPushDrawOffset(),
+						BEE_WIDTH * boar.flipW(), BEE_HEIGHT, null);
+				// boar.drawHitbox(g, xLvlOffset);
+				// boar.drawAttackBox(g, xLvlOffset);
 			}
 	}
 
 	private void drawBoars(Graphics g, int xLvlOffset) {
 		for (Boar bee : currentLevel.getBoars())
 			if (bee.isActive()) {
-        
-				g.drawImage(boarArr[bee.getState()][bee.getAniIndex()], 
+
+				g.drawImage(boarArr[bee.getState()][bee.getAniIndex()],
 						(int) bee.getHitbox().x - xLvlOffset - BOAR_DRAWOFFSET_X + bee.flipX(),
-						(int) bee.getHitbox().y - BOAR_DRAWOFFSET_Y + (int) bee.getPushDrawOffset(), BOAR_WIDTH * bee.flipW(), BOAR_HEIGHT, null);
-				//bee.drawHitbox(g, xLvlOffset);
+						(int) bee.getHitbox().y - BOAR_DRAWOFFSET_Y + (int) bee.getPushDrawOffset(),
+						BOAR_WIDTH * bee.flipW(), BOAR_HEIGHT, null);
+				// bee.drawHitbox(g, xLvlOffset);
 			}
 	}
 
@@ -104,10 +106,11 @@ public class EnemyManager {
 			if (boss.isActive()) {
 				g.drawImage(bossArr[boss.getState()][boss.getAniIndex()],
 						(int) boss.getHitbox().x - xLvlOffset - BOSS_DRAWOFFSET_X + boss.flipX(),
-						(int) boss.getHitbox().y - BOSS_DRAWOFFSET_Y + (int) boss.getPushDrawOffset(), BOSS_WIDTH * boss.flipW(), BOSS_HEIGHT, null);
-				//boss.drawHitbox(g, xLvlOffset);
-				//boss.drawAttackBox(g, xLvlOffset);
-				//boss.drawUI(g);
+						(int) boss.getHitbox().y - BOSS_DRAWOFFSET_Y + (int) boss.getPushDrawOffset(),
+						BOSS_WIDTH * boss.flipW(), BOSS_HEIGHT, null);
+				// boss.drawHitbox(g, xLvlOffset);
+				// boss.drawAttackBox(g, xLvlOffset);
+				// boss.drawUI(g);
 			}
 	}
 
