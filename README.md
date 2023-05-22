@@ -1,6 +1,8 @@
 # Knight2D
-![backgroundgame](postergame.png)
 
+<div text-align="center">
+<img src="res\report\postergame.png" alt="">
+</div>
 
 # Table of content
 1. [Introduction](#Introduction)
@@ -41,7 +43,7 @@ git status
 # GAME
 ## About the game
 - Language: [Java](https://www.java.com/en/)
-- IDEs: [IntelliJ IDEA](https://www.jetbrains.com/idea/), [VSCode](https://code.visualstudio.com/)
+- IDEs: [VSCode](https://code.visualstudio.com/)
 - Library: [JavaSwing](https://docs.oracle.com/javase/tutorial/uiswing/)
 - Game Engine: [Java2D](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html)
 - Sound: [JavaSound](https://docs.oracle.com/javase/7/docs/api/javax/sound/sampled/Clip.html)
@@ -53,14 +55,80 @@ git status
 | A  |  Move Left   |
 | D  | Move Right  |
 | W  | Jump  |
-| J  | Hit |
-| U  | Ultra Hit |
-| R  |   Run Faster   |
+| J  | Attack |
+| Hold J  | Ultra Attack |
+| I  |   Ulti Slash   |
+| L  |   Rush   |
   
 <div style = "text-align: justify">
 We have a total of 4 game stages, each with different difficulty. The player must destroy all monsters to get to the next level. In addition, each map we have placed wooden crates that heal or restore mana. In the final stage, the player must defeat the boss to complete the mission
 </div>
 
+<div text-align="center">
+    <video width="860" height="360" controls>
+        <source src="res\report\Knight_2D_video.mp4" type="video/mp4">
+    </video>
+</div>
 
+<div text-align="center">
+<img src="res\report\s1.png" alt="">
+</div>
+<div text-align="center">
+<img src="res\report\s2.png" alt="">
+</div>
+<div text-align="center">
+<img src="res\report\s3.png" alt="">
+</div>
+<div text-align="center">
+<img src="res\report\s4.png" alt="">
+</div>
 
+# UML Diagram
+
+<div>
+    <h3>Audio Diagram</h3>
+        <div text-align="center">
+            <img src="res\report\UML-Audio.png" alt="">
+        </div>
+    <br />
+    <h3>Entities Diagram</h3>
+        <div text-align="center">
+            <img src="res\report\UML-Entities.png" alt="">
+        </div>
+    <br />
+    <h3>Game states Diagram</h3>
+        <div text-align="center">
+            <img src="res\report\UML-GameStates.png" alt="">
+        </div>
+    <br />
+    <h3>Inputs Diagram</h3>
+        <div text-align="center">
+            <img src="res\report\UML-Inputs.png" alt="">
+        </div>
+    <br />
+    <h3>Levels Diagram</h3>
+        <div text-align="center">
+            <img src="res\report\UML-levels.png" alt="">
+        </div>
+    <br />
+    <h3>Main Diagram</h3>
+        <div text-align="center">
+            <img src="res\report\UML-Main.png" alt="">
+        </div>
+    <br />
+    <h3>Objects Diagram</h3>
+        <div text-align="center">
+            <img src="res\report\UML-objects.png" alt="">
+        </div>
+    <br />
+    <h3>GUI Diagram</h3>
+        <div text-align="center">
+            <img src="res\report\UML-UI.png" alt="">
+        </div>
+    <br />
+    <h3>Utilz Diagram</h3>
+        <div text-align="center">
+            <img src="res\report\UML-Utilz.png" alt="">
+        </div>
+</div>
 
