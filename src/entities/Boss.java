@@ -15,9 +15,9 @@ import main.Game;
 import utilz.LoadSave;
 
 public class Boss extends Enemy {
-	
+
 	private BufferedImage statusBarImg;
-	
+
 	private int statusBarWidth = (int) (192 * Game.SCALE);
 	private int statusBarHeight = (int) (58 * Game.SCALE);
 	private int statusBarX = (int) (600 * Game.SCALE);
@@ -38,8 +38,6 @@ public class Boss extends Enemy {
 		this.walkSpeed = 1.0f * Game.SCALE;
 		loadAnimations();
 	}
-	
-	
 
 	public void update(int[][] lvlData, Playing playing) {
 		updateBehavior(lvlData, playing);
@@ -56,52 +54,49 @@ public class Boss extends Enemy {
 			inAirChecks(lvlData, playing);
 		else {
 			switch (state) {
-				
-			case IDLE:
-				if (IsFloor(hitbox, lvlData)) {
-					
-					if (canSeePlayer(lvlData, playing.getPlayer())) {
-						turnTowardsPlayer(playing.getPlayer());
-						newState(RUNNING);
-					}
-				}
-				break;
-				
-			case RUNNING:
-				
-				if (IsFloor(hitbox, lvlData)) {
-				
-	
-				if (isPlayerCloseForAttack(playing.getPlayer()))
-						newState(ATTACK);
-				
-				}else
-					inAir = true;
 
-				move(lvlData);
-				
-				break;
-			case ATTACK:
-				
-				if (aniIndex == 0)
-					attackChecked = false;
-					
-						
-				if (!attackChecked) {
-					checkPlayerHit(attackBox, playing.getPlayer());
-					attackMove(lvlData, playing);
-				}
-				
-						
-				break;
+				case IDLE:
+					if (IsFloor(hitbox, lvlData)) {
+
+						if (canSeePlayer(lvlData, playing.getPlayer())) {
+							turnTowardsPlayer(playing.getPlayer());
+							newState(RUNNING);
+						}
+					}
+					break;
+
+				case RUNNING:
+
+					if (IsFloor(hitbox, lvlData)) {
+
+						if (isPlayerCloseForAttack(playing.getPlayer()))
+							newState(ATTACK);
+
+					} else
+						inAir = true;
+
+					move(lvlData);
+
+					break;
+				case ATTACK:
+
+					if (aniIndex == 0)
+						attackChecked = false;
+
+					if (!attackChecked) {
+						checkPlayerHit(attackBox, playing.getPlayer());
+						attackMove(lvlData, playing);
+					}
+
+					break;
 			}
 		}
 	}
-	
+
 	private void updateHealthBar() {
 		healthWidth = (int) ((currentHealth / (float) maxHealth) * healthBarWidth);
 	}
-	
+
 	protected void attackMove(int[][] lvlData, Playing playing) {
 		float xSpeed = 0;
 
@@ -117,20 +112,19 @@ public class Boss extends Enemy {
 			}
 		newState(IDLE);
 	}
-	
+
 	protected void drawUI(Graphics g) {
-		
+
 		g.drawImage(statusBarImg, statusBarX, statusBarY, statusBarWidth, statusBarHeight, null);
-		
+
 		g.setColor(Color.red);
 		g.fillRect(healthBarXStart + statusBarX, healthBarYStart + statusBarY, healthWidth, healthBarHeight);
-		
+
 	}
-	
+
 	private void loadAnimations() {
 		statusBarImg = LoadSave.GetSpriteAtlas(LoadSave.STATUS_BAR);
 	}
-	
 
 	@Override
 	public int flipX() {
@@ -139,7 +133,7 @@ public class Boss extends Enemy {
 		else
 			return width;
 	}
-	
+
 	@Override
 	public int flipW() {
 		if (walkDir == RIGHT)
