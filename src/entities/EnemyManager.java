@@ -28,21 +28,21 @@ public class EnemyManager {
 
 	public void update(int[][] lvlData) {
 		boolean isAnyActive = false;
-		for (Snail c : currentLevel.getSnails())
-			if (c.isActive()) {
-				c.update(lvlData, playing);
+		for (Snail snail : currentLevel.getSnails())
+			if (snail.isActive()) {
+				snail.update(lvlData, playing);
 				isAnyActive = true;
 			}
 		
-		for (Bee p : currentLevel.getBees())
-			if (p.isActive()) {
-				p.update(lvlData, playing);
+		for (Bee bee : currentLevel.getBees())
+			if (bee.isActive()) {
+				bee.update(lvlData, playing);
 				isAnyActive = true;
 			}
 		
-		for (Boar s : currentLevel.getBoars())
-			if (s.isActive()) {
-				s.update(lvlData, playing);
+		for (Boar boar : currentLevel.getBoars())
+			if (boar.isActive()) {
+				boar.update(lvlData, playing);
 				isAnyActive = true;
 			}
 		
@@ -64,34 +64,34 @@ public class EnemyManager {
 	}
 
 	private void drawSnails(Graphics g, int xLvlOffset) {
-		for (Snail c : currentLevel.getSnails())
-			if (c.isActive()) {
-				g.drawImage(snailArr[c.getState()][c.getAniIndex()], 
-						(int) c.getHitbox().x - xLvlOffset - SNAIL_DRAWOFFSET_X + c.flipX(), 
-						(int) c.getHitbox().y - SNAIL_DRAWOFFSET_Y + (int) c.getPushDrawOffset(),
-						SNAIL_WIDTH * c.flipW(), SNAIL_HEIGHT, null);
-			c.drawHitbox(g, xLvlOffset);
+		for (Snail snail : currentLevel.getSnails())
+			if (snail.isActive()) {
+				g.drawImage(snailArr[snail.getState()][snail.getAniIndex()], 
+						(int) snail.getHitbox().x - xLvlOffset - SNAIL_DRAWOFFSET_X + snail.flipX(), 
+						(int) snail.getHitbox().y - SNAIL_DRAWOFFSET_Y + (int) snail.getPushDrawOffset(),
+						SNAIL_WIDTH * snail.flipW(), SNAIL_HEIGHT, null);
+			snail.drawHitbox(g, xLvlOffset);
 		}
 	}
 		
 	private void drawBees(Graphics g, int xLvlOffset) {
-		for (Bee s : currentLevel.getBees())
-			if (s.isActive()) {
-				g.drawImage(beeArr[s.getState()][s.getAniIndex()], 
-						(int) s.getHitbox().x - xLvlOffset - BEE_DRAWOFFSET_X + s.flipX(),
-						(int) s.getHitbox().y - BEE_DRAWOFFSET_Y + (int) s.getPushDrawOffset(), BEE_WIDTH * s.flipW(), BEE_HEIGHT, null);
-				s.drawHitbox(g, xLvlOffset);
-				s.drawAttackBox(g, xLvlOffset);
+		for (Bee boar : currentLevel.getBees())
+			if (boar.isActive()) {
+				g.drawImage(beeArr[boar.getState()][boar.getAniIndex()], 
+						(int) boar.getHitbox().x - xLvlOffset - BEE_DRAWOFFSET_X + boar.flipX(),
+						(int) boar.getHitbox().y - BEE_DRAWOFFSET_Y + (int) boar.getPushDrawOffset(), BEE_WIDTH * boar.flipW(), BEE_HEIGHT, null);
+				//boar.drawHitbox(g, xLvlOffset);
+				//boar.drawAttackBox(g, xLvlOffset);
 			}
 		}
 		
 	private void drawBoars(Graphics g, int xLvlOffset) {
-		for (Boar p : currentLevel.getBoars())
-			if (p.isActive()) {
-				g.drawImage(boarArr[p.getState()][p.getAniIndex()], 
-						(int) p.getHitbox().x - xLvlOffset - BOAR_DRAWOFFSET_X + p.flipX(),
-						(int) p.getHitbox().y - BOAR_DRAWOFFSET_Y + (int) p.getPushDrawOffset(), BOAR_WIDTH * p.flipW(), BOAR_HEIGHT, null);
-				p.drawHitbox(g, xLvlOffset);
+		for (Boar bee : currentLevel.getBoars())
+			if (bee.isActive()) {
+				g.drawImage(boarArr[bee.getState()][bee.getAniIndex()], 
+						(int) bee.getHitbox().x - xLvlOffset - BOAR_DRAWOFFSET_X + bee.flipX(),
+						(int) bee.getHitbox().y - BOAR_DRAWOFFSET_Y + (int) bee.getPushDrawOffset(), BOAR_WIDTH * bee.flipW(), BOAR_HEIGHT, null);
+				//bee.drawHitbox(g, xLvlOffset);
 			}
 		}
 	
@@ -101,38 +101,38 @@ public class EnemyManager {
 				g.drawImage(bossArr[boss.getState()][boss.getAniIndex()], 
 						(int) boss.getHitbox().x - xLvlOffset - BOSS_DRAWOFFSET_X + boss.flipX(),
 						(int) boss.getHitbox().y - BOSS_DRAWOFFSET_Y + (int) boss.getPushDrawOffset(), BOSS_WIDTH * boss.flipW(), BOSS_HEIGHT, null);
-				boss.drawHitbox(g, xLvlOffset);
-				boss.drawAttackBox(g, xLvlOffset);
-				boss.drawUI(g);
+				//boss.drawHitbox(g, xLvlOffset);
+				//boss.drawAttackBox(g, xLvlOffset);
+				//boss.drawUI(g);
 			}
 		}
 
 	public void checkEnemyHit(Rectangle2D.Float attackBox) {
-		for (Snail c : currentLevel.getSnails())
-			if (c.isActive())
-				if (c.getState() != HIT)
-					if (attackBox.intersects(c.getHitbox())) {
-						c.hurt(10);
+		for (Snail snail : currentLevel.getSnails())
+			if (snail.isActive())
+				if (snail.getState() != HIT)
+					if (attackBox.intersects(snail.getHitbox())) {
+						snail.hurt(10);
 						return;
 				}
-		for (Bee p : currentLevel.getBees())
-			if (p.isActive()) {
-				if (p.getState() == ATTACK && p.getAniIndex() >= 3)
+		for (Bee bee : currentLevel.getBees())
+			if (bee.isActive()) {
+				if (bee.getState() == ATTACK && bee.getAniIndex() >= 3)
 					return;
 				else {
-					if (p.getState() != HIT)
-						if (attackBox.intersects(p.getHitbox())) {
-							p.hurt(20);
+					if (bee.getState() != HIT)
+						if (attackBox.intersects(bee.getHitbox())) {
+							bee.hurt(20);
 							return;
 						}
 				}
 			}
 
-		for (Boar s : currentLevel.getBoars())
-			if (s.isActive()) {
-				if (s.getState() != HIT)
-					if (attackBox.intersects(s.getHitbox())) {
-						s.hurt(20);
+		for (Boar boar : currentLevel.getBoars())
+			if (boar.isActive()) {
+				if (boar.getState() != HIT)
+					if (attackBox.intersects(boar.getHitbox())) {
+						boar.hurt(20);
 						return;
 			
 					}
@@ -150,31 +150,31 @@ public class EnemyManager {
 	}
 	
 	public void checkEnemyHit(Projectile projectile) {
-		for (Snail c : currentLevel.getSnails())
-			if (c.isActive())
-				if (c.getState() != HIT)
-					if (projectile.getHitbox().intersects(c.getHitbox())) {
-						c.hurt(100);
+		for (Snail snail : currentLevel.getSnails())
+			if (snail.isActive())
+				if (snail.getState() != HIT)
+					if (projectile.getHitbox().intersects(snail.getHitbox())) {
+						snail.hurt(100);
 						return;
 				}
-		for (Bee p : currentLevel.getBees())
-			if (p.isActive()) {
-				if (p.getState() == ATTACK && p.getAniIndex() >= 3)
+		for (Bee bee : currentLevel.getBees())
+			if (bee.isActive()) {
+				if (bee.getState() == ATTACK && bee.getAniIndex() >= 3)
 					return;
 				else {
-					if (p.getState() != HIT)
-						if (projectile.getHitbox().intersects(p.getHitbox())) {
-							p.hurt(100);
+					if (bee.getState() != HIT)
+						if (projectile.getHitbox().intersects(bee.getHitbox())) {
+							bee.hurt(100);
 							return;
 						}
 				}
 			}
 
-		for (Boar s : currentLevel.getBoars())
-			if (s.isActive()) {
-				if (s.getState() != HIT)
-					if (projectile.getHitbox().intersects(s.getHitbox())) {
-						s.hurt(100);
+		for (Boar boar : currentLevel.getBoars())
+			if (boar.isActive()) {
+				if (boar.getState() != HIT)
+					if (projectile.getHitbox().intersects(boar.getHitbox())) {
+						boar.hurt(100);
 						return;
 			
 					}
@@ -208,12 +208,12 @@ public class EnemyManager {
 	}
 	
 	public void resetAllEnemies() {
-		for (Snail c : currentLevel.getSnails())
-			c.resetEnemy();
-		for (Bee p : currentLevel.getBees())
-			p.resetEnemy();
-		for (Boar s : currentLevel.getBoars())
-			s.resetEnemy();
+		for (Snail snail : currentLevel.getSnails())
+			snail.resetEnemy();
+		for (Bee bee : currentLevel.getBees())
+			bee.resetEnemy();
+		for (Boar boar : currentLevel.getBoars())
+			boar.resetEnemy();
 		for (Boss boss : currentLevel.getBosses())
 			boss.resetEnemy();
 	}
