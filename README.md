@@ -65,12 +65,6 @@ We have a total of 4 game stages, each with different difficulty. The player mus
 </div>
 
 <div text-align="center">
-    <video width="860" height="360" controls>
-        <source src="res\report\Knight_2D_video.mp4" type="video/mp4">
-    </video>
-</div>
-
-<div text-align="center">
 <img src="res\report\s1.png" alt="">
 </div>
 <div text-align="center">
