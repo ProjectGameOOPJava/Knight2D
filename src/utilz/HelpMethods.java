@@ -23,15 +23,10 @@ public class HelpMethods {
 		if (y < 0 || y >= Game.GAME_HEIGHT)
 			return true;
 
-		float xIndex = x / Game.TILES_SIZE;
+		float xIndex = x / Game.TILES_SIZE; 
 		float yIndex = y / Game.TILES_SIZE;
 
 		return IsTileSolid((int) xIndex, (int) yIndex, lvlData);
-	}
-	
-	public static boolean IsProjectileHittingLevel(Projectile p, int[][] lvlData) {
-		return IsSolid(p.getHitbox().x + p.getHitbox().width / 2, p.getHitbox().y + p.getHitbox().height / 2, lvlData);
-
 	}
 
 	public static boolean IsTileSolid(int xTile, int yTile, int[][] lvlData) {
@@ -40,6 +35,10 @@ public class HelpMethods {
 		if (value >= 48 || value < 0 || value != 11)
 			return true;
 		return false;
+	}
+
+	public static boolean IsProjectileHittingLevel(Projectile p, int[][] lvlData) {
+		return IsSolid(p.getHitbox().x + p.getHitbox().width / 2, p.getHitbox().y + p.getHitbox().height / 2, lvlData);
 	}
 	
 	public static float GetEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {

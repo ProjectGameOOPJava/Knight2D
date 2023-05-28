@@ -41,7 +41,6 @@ public class Player extends Entity {
 	private int healthBarHeight = (int) (4 * Game.SCALE);
 	private int healthBarXStart = (int) (34 * Game.SCALE);
 	private int healthBarYStart = (int) (14 * Game.SCALE);
-
 	private int healthWidth = healthBarWidth;
 
 	private int powerBarWidth = (int) (104 * Game.SCALE);
@@ -128,7 +127,7 @@ public class Player extends Entity {
 			}
 			return;
 		}
-
+		
 		updateAttackBox();
 		if (state == HIT) {
 			if (aniIndex <= GetSpriteAmount(HIT))
@@ -227,7 +226,7 @@ public class Player extends Entity {
 
 		g.drawImage(animations[state][aniIndex], 
 				(int) (hitbox.x - xDrawOffset) - lvlOffset + flipX, 
-				(int) (hitbox.y - yDrawOffset + + (int) (pushDrawOffset)), width * flipW, height, null);
+				(int) (hitbox.y - yDrawOffset + (int) (pushDrawOffset)), width * flipW, height, null);
 		//drawHitbox(g, lvlOffset);
 		//drawAttackBox(g, lvlOffset);
 
@@ -393,8 +392,7 @@ public class Player extends Entity {
 			changePower(-20);
 			playing.getGame().getAudioPlayer().playEffect(AudioPlayer.JUMP);
 		}
-
-}
+	}
 
 	private void resetInAir() {
 		inAir = false;
@@ -564,10 +562,10 @@ public class Player extends Entity {
 			return;
 
 		if (!inAir)
-			if (powerValue >= 200) {
+			if (powerValue >= 190) {
 
 				slashActive = true;
-				changePower(-200);
+				changePower(-190);
 				playing.getGame().getAudioPlayer().playEffect(AudioPlayer.ATTACK_THREE);
 			}
 	}

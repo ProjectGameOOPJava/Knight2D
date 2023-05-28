@@ -47,6 +47,7 @@ public class GameCompletedOverlay {
 	public void update() {
 		
 		quit.update();
+		
 	}
 
 	private boolean isIn(MenuButton b, MouseEvent e) {

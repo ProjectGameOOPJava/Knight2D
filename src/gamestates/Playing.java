@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-import entities.Enemy;
+import audio.AudioPlayer;
 import entities.EnemyManager;
 import entities.Player;
 import levels.LevelManager;
@@ -79,6 +79,7 @@ public class Playing extends State implements Statemethods {
 	private void loadStartLevel() {
 		enemyManager.loadEnemies(levelManager.getCurrentLevel());
 		objectManager.loadObjects(levelManager.getCurrentLevel());
+	
 	}
 
 	private void calcLvlOffset() {
@@ -297,11 +298,13 @@ public class Playing extends State implements Statemethods {
 
 	public void setLevelCompleted(boolean levelCompleted) {
 		game.getAudioPlayer().lvlCompleted();
-		if (levelManager.getLevelIndex() >= levelManager.getAmountOfLevels()) {
+		if (levelManager.getLevelIndex() + 1 >= levelManager.getAmountOfLevels()) {
 			// No more levels
 			gameCompleted = true;
+			
 			levelManager.setLevelIndex(0);
-			levelManager.loadNextLevel();
+			this.loadNextLevel();
+	
 			resetAll();
 			return;
 		}

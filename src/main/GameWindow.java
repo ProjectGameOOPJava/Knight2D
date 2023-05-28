@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 
@@ -22,7 +21,6 @@ public class GameWindow {
         jframe.add(gamePanel);
         jframe.setResizable(false);
 		jframe.pack();
-        jframe.setIconImage(icon.getImage());
         jframe.setLocationRelativeTo(null);
         jframe.setVisible(true);
 
