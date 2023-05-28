@@ -22,7 +22,7 @@ public class Game implements Runnable {
 	private AudioOptions audioOptions;
 	private AudioPlayer audioPlayer;
 
-	public final static int TILES_DEFAULT_SIZE = 32;
+	public final static int TILES_DEFAULT_SIZE = 32; //32x32
 	public final static float SCALE = 1.0f;
 	public final static int TILES_IN_WIDTH = 26;
 	public final static int TILES_IN_HEIGHT = 14;
@@ -95,7 +95,7 @@ public class Game implements Runnable {
 	@Override
 	public void run() {
 
-		double timePerFrame = 1000000000.0 / FPS_SET;
+		double timePerFrame = 1000000000.0 / FPS_SET; //1s = 10^9 ns
 		double timePerUpdate = 1000000000.0 / UPS_SET;
 
 		long previousTime = System.nanoTime();
@@ -124,7 +124,7 @@ public class Game implements Runnable {
 				frames++;
 				deltaF--;
 			}
-			if (System.currentTimeMillis() - lastCheck >= 1000) {
+			if (System.currentTimeMillis() - lastCheck >= 1000) { //1s = 1000ms
 				lastCheck = System.currentTimeMillis();
 				System.out.println("FPS: " + frames + " | UPS: " + updates);
 				frames = 0;

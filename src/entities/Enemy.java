@@ -123,7 +123,7 @@ public abstract class Enemy extends Entity {
 			case BEE: 
 				return absValue <= attackDistance * 2;
 			case BOSS:
-				return absValue <= attackDistance * 3;
+				return absValue <= attackDistance * 2;
 		}
 		return false;
 	}
@@ -147,11 +147,7 @@ public abstract class Enemy extends Entity {
 			player.changeHealth(-GetEnemyDmg(enemyType), this);
 			
 		}
-			
-		else {
-			if (enemyType == BEE)
-				return;
-		}
+		
 		attackChecked = true;
 
 	}
@@ -196,7 +192,7 @@ public abstract class Enemy extends Entity {
 						heal(50);
 						break;
 					case ATTACK:
-						System.out.println(currentHealth);
+						//System.out.println(currentHealth);
 						state = IDLE;
 						break;
 					case HIT:

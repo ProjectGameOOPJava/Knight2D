@@ -74,24 +74,25 @@ public class EnemyManager {
 		}
 	}
 		
-	private void drawBees(Graphics g, int xLvlOffset) {
-		for (Bee boar : currentLevel.getBees())
+	private void drawBoars(Graphics g, int xLvlOffset) {
+		for (Boar boar : currentLevel.getBoars())
 			if (boar.isActive()) {
-				g.drawImage(beeArr[boar.getState()][boar.getAniIndex()], 
-						(int) boar.getHitbox().x - xLvlOffset - BEE_DRAWOFFSET_X + boar.flipX(),
-						(int) boar.getHitbox().y - BEE_DRAWOFFSET_Y + (int) boar.getPushDrawOffset(), BEE_WIDTH * boar.flipW(), BEE_HEIGHT, null);
-				boar.drawHitbox(g, xLvlOffset);
-				//boar.drawAttackBox(g, xLvlOffset);
+				g.drawImage(boarArr[boar.getState()][boar.getAniIndex()], 
+						(int) boar.getHitbox().x - xLvlOffset - BOAR_DRAWOFFSET_X + boar.flipX(),
+						(int) boar.getHitbox().y - BOAR_DRAWOFFSET_Y + (int) boar.getPushDrawOffset(), BOAR_WIDTH * boar.flipW(), BOAR_HEIGHT, null);
+				//boar.drawHitbox(g, xLvlOffset);
+				
 			}
 		}
 		
-	private void drawBoars(Graphics g, int xLvlOffset) {
-		for (Boar bee : currentLevel.getBoars())
+	private void drawBees(Graphics g, int xLvlOffset) {
+		for (Bee bee : currentLevel.getBees())
 			if (bee.isActive()) {
-				g.drawImage(boarArr[bee.getState()][bee.getAniIndex()], 
-						(int) bee.getHitbox().x - xLvlOffset - BOAR_DRAWOFFSET_X + bee.flipX(),
-						(int) bee.getHitbox().y - BOAR_DRAWOFFSET_Y + (int) bee.getPushDrawOffset(), BOAR_WIDTH * bee.flipW(), BOAR_HEIGHT, null);
+				g.drawImage(beeArr[bee.getState()][bee.getAniIndex()], 
+						(int) bee.getHitbox().x - xLvlOffset - BEE_DRAWOFFSET_X + bee.flipX(),
+						(int) bee.getHitbox().y - BEE_DRAWOFFSET_Y + (int) bee.getPushDrawOffset(), BEE_WIDTH * bee.flipW(), BEE_HEIGHT, null);
 				//bee.drawHitbox(g, xLvlOffset);
+				//bee.drawAttackBox(g, xLvlOffset);
 			}
 		}
 	

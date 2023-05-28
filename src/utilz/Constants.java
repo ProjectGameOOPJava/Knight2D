@@ -39,7 +39,7 @@ public class Constants {
 		public static final int CANNON_LEFT = 5;
 		public static final int CANNON_RIGHT = 6;
 
-		public static final int RED_POTION_VALUE = 75;
+		public static final int RED_POTION_VALUE = 50;
 		public static final int BLUE_POTION_VALUE = 150;
 
 		public static final int CONTAINER_WIDTH_DEFAULT = 40;
@@ -212,11 +212,11 @@ public class Constants {
 		public static int GetMaxHealth(int enemy_type) {
 			switch (enemy_type) {
 			case SNAIL:
-				return 1;
+				return 200;
 			case BOAR:
-				return 40;
+				return 100;
 			case BEE: 
-				return 30;
+				return 50;
 			case BOSS:
 				return 200;
 			default:
